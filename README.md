@@ -1,4 +1,4 @@
-# Приложение для генерации задач по планиметрии
-> Eng: **Planimetry Problem Generation Application**
+# Визуализатор клеточных автоматов
+> ENG: **Cellular automata visualizeg*
 
 > Курсовая работа, Абдельсалам Шади, БПИ191
