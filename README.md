@@ -1,4 +1,4 @@
 # Визуализатор клеточных автоматов
-> ENG: **Cellular automata visualizeg*
+> ENG: **Cellular automata visualizer**
 
 > Курсовая работа, Абдельсалам Шади, БПИ191
