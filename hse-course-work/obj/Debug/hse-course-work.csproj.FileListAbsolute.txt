@@ -1,0 +1,15 @@
+C:\Users\User\source\repos\hse-course-work\hse-course-work\bin\Debug\hse-course-work.exe.config
+C:\Users\User\source\repos\hse-course-work\hse-course-work\bin\Debug\hse-course-work.exe
+C:\Users\User\source\repos\hse-course-work\hse-course-work\bin\Debug\hse-course-work.pdb
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\hse-course-work.csprojAssemblyReference.cache
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\MainWindow.g.cs
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\App.g.cs
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\hse-course-work_MarkupCompile.cache
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\hse-course-work_MarkupCompile.lref
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\MainWindow.baml
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\hse-course-work.g.resources
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\hse_course_work.Properties.Resources.resources
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\hse-course-work.csproj.GenerateResource.cache
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\hse-course-work.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\hse-course-work.exe
+C:\Users\User\source\repos\hse-course-work\hse-course-work\obj\Debug\hse-course-work.pdb
