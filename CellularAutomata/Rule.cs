@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CellularAutomata.Properties;
 
 namespace CellularAutomata
 {
@@ -14,10 +15,10 @@ namespace CellularAutomata
     public abstract class Rule
     {
         // Next state of a cell
-        readonly Cell _nextState;
+        internal Cell _nextState;
 
         // List of all cell's neighbors
-        internal readonly Cell[] CellNeighborhood;
+        internal Cell[] CellNeighborhood;
 
         protected Rule(Cell nextState, Cell[] cellNeighborhood)
         {
@@ -36,6 +37,7 @@ namespace CellularAutomata
         {
             return this is ExactPatternRule
                 ? (this as ExactPatternRule).CheckSuitability(cellNeighborhood)
+                : (this as XorRule).CheckSuitability(cellNeighborhood) ? this is XorRule
                 : false;
         }
         
