@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CellularAutomata.Properties;
+using CellularAutomata;
 
 namespace CellularAutomata
 {
@@ -15,15 +15,20 @@ namespace CellularAutomata
     public abstract class Rule
     {
         // Next state of a cell
-        internal Cell _nextState;
+        internal Cell NextState;
 
         // List of all cell's neighbors
         internal Cell[] CellNeighborhood;
 
         protected Rule(Cell nextState, Cell[] cellNeighborhood)
         {
-            _nextState = nextState;
+            NextState = nextState;
             CellNeighborhood = cellNeighborhood;
+        }
+
+        protected Rule(Cell nextState)
+        {
+            NextState = nextState;
         }
 
         protected Rule() { }
@@ -37,7 +42,12 @@ namespace CellularAutomata
         {
             return this is ExactPatternRule
                 ? (this as ExactPatternRule).CheckSuitability(cellNeighborhood)
-                : (this as XorRule).CheckSuitability(cellNeighborhood) ? this is XorRule
+                : this is XorRule
+                
+                ? (this as XorRule).CheckSuitability(cellNeighborhood)
+                : this is NearbyNeighborsRule
+                
+                ? (this as NearbyNeighborsRule).CheckSuitability(cellNeighborhood)
                 : false;
         }
         
@@ -50,7 +60,9 @@ namespace CellularAutomata
         {
             // If this is empty rule then the next state doesn't need to be changed
             if (!(this is EmptyRule))
-                cell.Properties = _nextState.Properties;
+                cell.Properties = NextState.Properties;
+            else if ((this as EmptyRule)._shouldCellUpdateToDefault)
+                cell = new Cell();
         }
     }
 }

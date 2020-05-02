@@ -8,7 +8,12 @@ namespace CellularAutomata
 {
     public class EmptyRule : Rule
     {
-        public EmptyRule() { }
+        internal bool _shouldCellUpdateToDefault;
+        
+        public EmptyRule(bool shouldCellUpdateToDefault)
+        {
+            _shouldCellUpdateToDefault = shouldCellUpdateToDefault;
+        }
 
         public new bool CheckSuitability(Cell[] cellNeighborhood)
         {

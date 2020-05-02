@@ -11,12 +11,17 @@ namespace CellularAutomata
         // List of all rules
         Rule[] _ruleSet;
         
-        private readonly Cell _defaultCellProperties;
+        readonly Cell _defaultCellProperties;
 
-        public RuleSet(Rule[] ruleSet, Cell defaultCellProperties)
+        // If true then cell will update to default
+        // if no proper rule was found (if EmptyRule was returned) 
+        readonly bool _shouldCellUpdateToDefault;
+        
+        public RuleSet(Rule[] ruleSet, Cell defaultCellProperties, bool shouldCellUpdateToDefault = false)
         {
             _ruleSet = ruleSet;
             _defaultCellProperties = defaultCellProperties;
+            _shouldCellUpdateToDefault = shouldCellUpdateToDefault;
         }
         
         /// <summary>
@@ -30,7 +35,7 @@ namespace CellularAutomata
                 if (rule.CheckSuitability(neighborhood))
                     return rule;
 
-            return new EmptyRule();
+            return new EmptyRule(_shouldCellUpdateToDefault);
         }
 
     }

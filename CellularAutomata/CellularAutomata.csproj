@@ -47,10 +47,11 @@
     <Compile Include="EmptyRule.cs" />
     <Compile Include="ExactPatternRule.cs" />
     <Compile Include="GameField.cs" />
+    <Compile Include="NearbyNeighborsRule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\XorRule.cs" />
     <Compile Include="Rule.cs" />
     <Compile Include="RuleSet.cs" />
+    <Compile Include="XorRule.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

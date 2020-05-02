@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace CellularAutomata.Properties
+namespace CellularAutomata
 {
     public class XorRule : Rule
     {
@@ -14,8 +14,7 @@ namespace CellularAutomata.Properties
 
         public new bool CheckSuitability(Cell[] cellNeighborhood)
         {
-            
-                char[] cellsStateBits = new char[cellNeighborhood.Length];
+            char[] cellsStateBits = new char[cellNeighborhood.Length];
                 
                 for (int i = 0; i < cellNeighborhood.Length; i++)
                     cellsStateBits[i] = (bool)cellNeighborhood[i].Properties["isAlive"] ? '1' : '0';
@@ -23,15 +22,10 @@ namespace CellularAutomata.Properties
                 // Rule for transition of a neighborhood
                 int[] transitionBits = ConvertToBits(_ruleNumber, (int) Math.Pow(2, cellNeighborhood.Length));
 
-                _nextState = new Cell(
+                NextState = new Cell(
                     transitionBits[
                         transitionBits.Length - Convert.ToInt16(new string(cellsStateBits), 2) - 1
                     ] > 0);
-                
-                // Console.WriteLine(transitionBits[
-                //     transitionBits.Length - Convert.ToInt16(new string(cellsStateBits), 2) - 1
-                // ] + " " + Convert.ToInt16(new string(cellsStateBits), 2));
-                
 
             return true;
         }
