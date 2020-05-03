@@ -50,38 +50,25 @@ namespace CellularAutomata
             for (int i = 0; i < _neighborhoodCoords.Length; i++)
             {
                 // 1D automata - only one coordinate
-                switch (_neighborhoodCoords[i].Length)
+                try
                 {
-                    case 1:
-                        try
-                        {
-                            neighborhood[i] = _cells[yCoordinate][xCoordinate + _neighborhoodCoords[i][0]];
-                        }
-                        catch (IndexOutOfRangeException)
-                        {
-                            neighborhood[i] = new Cell(); // DEFAULT CELL
-                        }
-
-                        break;
-                    case 2:
-                        try
-                        {
-                            neighborhood[i] =
-                                _cells[yCoordinate + _neighborhoodCoords[i][1]]
-                                    [xCoordinate + _neighborhoodCoords[i][0]];
-                        }
-                        catch (IndexOutOfRangeException)
-                        {
-                            neighborhood[i] = new Cell(); // DEFAULT CELL
-                        }
-
-                        break;
-                    default:
-                        // TODO: Throw custom exception
-                        throw new Exception(
-                                "Neighbor should have the same number of coordinates as there are dimensions in the automata"
-                            );
+                    if (_isInfinite)
+                        neighborhood[i] = _cells[(yCoordinate + (_neighborhoodCoords[i].Length >= 2 ? _neighborhoodCoords[i][1] : 0) + _cells.Length) % _cells.Length]
+                                                [(xCoordinate + _neighborhoodCoords[i][0] + _cells[i].Length) % _cells[i].Length];
+                    else
+                        neighborhood[i] = _cells[yCoordinate + (_neighborhoodCoords[i].Length >= 2 ? _neighborhoodCoords[i][1] : 0)]
+                                                [xCoordinate + _neighborhoodCoords[i][0]];
                 }
+                catch (IndexOutOfRangeException)
+                {
+                    neighborhood[i] = new Cell(); // DEFAULT CELL
+                }
+
+                if (_neighborhoodCoords[i].Length > 2)
+                    // TODO: Throw custom exception
+                    throw new Exception(
+                            "Neighbor should have the same number of coordinates as there are dimensions in the automata"
+                        );
             }
             
             return neighborhood;
@@ -91,6 +78,7 @@ namespace CellularAutomata
         {
             /* if _cells.Length is 1 then there's only one
                 dimension otherwise there are two */
+            
             switch (_cells.Length)
             {
                 case 1:

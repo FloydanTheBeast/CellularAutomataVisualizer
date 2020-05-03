@@ -78,7 +78,7 @@ namespace ConsoleTestingApp
             }, new Cell(), true);
 
             /*
-                Code for testing 1D cellular automata 
+                // Code for testing 1D cellular automata 
                 int i = 1;
                 
                 do
@@ -92,15 +92,15 @@ namespace ConsoleTestingApp
             
             Cell[][] startingField2D = CellListGenerator.Generate(20, 20);
 
-            /* Glider
+            // Glider
             startingField2D[2][1] = new Cell(true);
             startingField2D[3][2] = new Cell(true);
             startingField2D[3][3] = new Cell(true);
             startingField2D[2][3] = new Cell(true);
             startingField2D[1][3] = new Cell(true);
-            */
-            
-            // startingField2D[3][2] = new Cell(true);
+
+            /* // Glided for B3/S35
+            startingField2D[3][2] = new Cell(true);
             startingField2D[3][3] = new Cell(true);
             startingField2D[3][4] = new Cell(true);
             startingField2D[3][5] = new Cell(true);
@@ -109,9 +109,9 @@ namespace ConsoleTestingApp
             startingField2D[5][5] = new Cell(true);
             startingField2D[5][4] = new Cell(true);
             startingField2D[5][3] = new Cell(true);
-            // startingField2D[5][2] = new Cell(true);
-            
-            
+            startingField2D[5][2] = new Cell(true);
+            */
+
             RuleSet ruleGol = new RuleSet(new []
             {
                 new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3, new Cell()),
@@ -136,13 +136,13 @@ namespace ConsoleTestingApp
                 new [] {1, -1},
                 new [] {1, 0},
                 new [] {1, 1},
-            });
+            }, true);
 
             do
             {
                 Console.Clear();
                 gf2D.PrintToConsole();
-                gf2D.ChangeField(ruleGolb3S35);
+                gf2D.ChangeField(ruleGol);
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
     }
