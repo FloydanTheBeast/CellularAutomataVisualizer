@@ -10,7 +10,7 @@ namespace CellularAutomata
     {
         public Dictionary<string, object> Properties = new Dictionary<string, object>{
             { "isAlive", false }
-        }; // FIXME: Set default value in the constructor
+        }; // TODO: Set default value in the constructor
 
         public static readonly Dictionary<string, object> DefaultProperties = new Dictionary<string, object>{
             { "isAlive", false }
@@ -43,12 +43,30 @@ namespace CellularAutomata
         }
         
         // TODO: Delete constructor 
-        public Cell(bool isAlive)
+        public Cell(bool isAlive = false)
         {
             Properties["isAlive"] = isAlive;
         }
+
+        public static bool operator ==(Cell cell1, Cell cell2)
+        {
+            if (ReferenceEquals(null, cell1))
+                return ReferenceEquals(null, cell2);
+
+            if (ReferenceEquals(null, cell2))
+                return false;
+
+            return cell1.CompareTo(cell2) == 0;
+        }
         
-        public Cell() {}
+        public static bool operator !=(Cell cell1, Cell cell2)
+        {
+            return !(cell1 == cell2);
+        }
+
+        public static bool operator true(Cell cell) => cell != null;
+        
+        public static bool operator false(Cell cell) => cell == null;
         
         public void ChangeProperties() {} // TODO: Write change properties method
 
@@ -59,16 +77,16 @@ namespace CellularAutomata
         /// <returns>CompareTo value</returns>
         public int CompareTo(Cell otherCell)
         {
-            // FIXME: Use LINQ instead
+            // TODO: Use LINQ instead
             foreach (var key in Properties.Keys)
             {
                 if (Properties[key] is bool)
-                    return (Properties[key] as bool?).Value.CompareTo(otherCell[key] as bool?);
+                    return ((bool?)Properties[key]).Value.CompareTo(otherCell[key] as bool?);
             }
             return 0;
         }
         
-        public object this[string index] => Properties[index]; // FIXME: Catch all possible exceptions
+        public object this[string index] => Properties[index]; // TODO: Catch all possible exceptions
     
         public override string ToString()
         {

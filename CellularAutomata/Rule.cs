@@ -42,12 +42,13 @@ namespace CellularAutomata
         {
             return this is ExactPatternRule
                 ? (this as ExactPatternRule).CheckSuitability(cellNeighborhood)
+                
                 : this is XorRule
-                
                 ? (this as XorRule).CheckSuitability(cellNeighborhood)
-                : this is NearbyNeighborsRule
-                
+                    
+                : this is NearbyNeighborsRule 
                 ? (this as NearbyNeighborsRule).CheckSuitability(cellNeighborhood)
+                
                 : false;
         }
         
