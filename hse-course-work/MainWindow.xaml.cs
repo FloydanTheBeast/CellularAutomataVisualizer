@@ -23,7 +23,6 @@ namespace hse_course_work
         public MainWindow()
         {
             InitializeComponent();
-            Console.WriteLine("test");
         }
 
         private void TestBtn_Click(object sender, RoutedEventArgs e)

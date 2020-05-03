@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "hse-course-work", "hse-course-work\hse-course-work.csproj", "{77622C5E-6DF9-48DD-8927-A64BC936BBF3}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CellularAutomata", "CellularAutomata\CellularAutomata.csproj", "{94F8190B-EE06-46B2-B35F-B0856B0FEE0C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTestingApp", "ConsoleTestingApp\ConsoleTestingApp.csproj", "{0F4084F9-C794-4FDF-8AC2-56969C73A412}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,14 +13,14 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{77622C5E-6DF9-48DD-8927-A64BC936BBF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{77622C5E-6DF9-48DD-8927-A64BC936BBF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{77622C5E-6DF9-48DD-8927-A64BC936BBF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{77622C5E-6DF9-48DD-8927-A64BC936BBF3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{94F8190B-EE06-46B2-B35F-B0856B0FEE0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{94F8190B-EE06-46B2-B35F-B0856B0FEE0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{94F8190B-EE06-46B2-B35F-B0856B0FEE0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{94F8190B-EE06-46B2-B35F-B0856B0FEE0C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0F4084F9-C794-4FDF-8AC2-56969C73A412}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0F4084F9-C794-4FDF-8AC2-56969C73A412}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0F4084F9-C794-4FDF-8AC2-56969C73A412}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0F4084F9-C794-4FDF-8AC2-56969C73A412}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

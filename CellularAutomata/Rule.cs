@@ -18,7 +18,7 @@ namespace CellularAutomata
         internal Cell NextState;
 
         // List of all cell's neighbors
-        internal Cell[] CellNeighborhood;
+        internal readonly Cell[] CellNeighborhood;
 
         protected Rule(Cell nextState, Cell[] cellNeighborhood)
         {
@@ -41,13 +41,13 @@ namespace CellularAutomata
         public bool CheckSuitability(Cell[] cellNeighborhood)
         {
             return this is ExactPatternRule
-                ? (this as ExactPatternRule).CheckSuitability(cellNeighborhood)
+                ? ((ExactPatternRule) this).CheckSuitability(cellNeighborhood)
                 
                 : this is XorRule
-                ? (this as XorRule).CheckSuitability(cellNeighborhood)
+                ? ((XorRule) this).CheckSuitability(cellNeighborhood)
                     
                 : this is NearbyNeighborsRule 
-                ? (this as NearbyNeighborsRule).CheckSuitability(cellNeighborhood)
+                ? ((NearbyNeighborsRule) this).CheckSuitability(cellNeighborhood)
                 
                 : false;
         }
@@ -62,7 +62,7 @@ namespace CellularAutomata
             // If this is empty rule then the next state doesn't need to be changed
             if (!(this is EmptyRule))
                 cell.Properties = NextState.Properties;
-            else if ((this as EmptyRule)._shouldCellUpdateToDefault)
+            else if (((EmptyRule) this).ShouldCellUpdateToDefault)
                 cell = new Cell();
         }
     }

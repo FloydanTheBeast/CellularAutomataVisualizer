@@ -64,10 +64,6 @@ namespace CellularAutomata
             return !(cell1 == cell2);
         }
 
-        public static bool operator true(Cell cell) => cell != null;
-        
-        public static bool operator false(Cell cell) => cell == null;
-        
         public void ChangeProperties() {} // TODO: Write change properties method
 
         /// <summary>
@@ -98,7 +94,7 @@ namespace CellularAutomata
         public object Clone()
         {    
             return new Cell(
-                (Properties["isAlive"] as bool?).Value
+                ((bool?) Properties["isAlive"]).Value
             );
         }
     }

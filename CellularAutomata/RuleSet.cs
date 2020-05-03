@@ -9,7 +9,7 @@ namespace CellularAutomata
     public class RuleSet
     {
         // List of all rules
-        Rule[] _ruleSet;
+        readonly Rule[] _ruleSet;
         
         readonly Cell _defaultCellProperties;
 

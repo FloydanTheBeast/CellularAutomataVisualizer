@@ -46,30 +46,7 @@ namespace CellularAutomata
         Cell[] GetNeighborhood(int xCoordinate, int yCoordinate = 0)
         {
             Cell[] neighborhood = new Cell[_neighborhoodCoords.Length];
-
-            // switch (_cells.GetLength(0))
-            // {
-            //     case 1:
-            //         int i = 0;
-            //         
-            //         foreach (int neighborCoords in _neighborhoodCoords)
-            //         {
-            //             try
-            //             {
-            //                 neighborhood[i] = _cells[0][xCoordinate + neighborCoords];
-            //             }
-            //             catch (IndexOutOfRangeException)
-            //             {
-            //                 neighborhood[i] = new Cell(); // DEFAULT CELL
-            //             }
-            //             finally
-            //             {
-            //                 i++;
-            //             }
-            //         }
-            //         break;
-            // }
-
+            
             for (int i = 0; i < _neighborhoodCoords.Length; i++)
             {
                 // 1D automata - only one coordinate
