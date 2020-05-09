@@ -15,10 +15,10 @@ namespace CellularAutomata
     public abstract class Rule
     {
         // Next state of a cell
-        internal Cell NextState;
+        public Cell NextState;
 
         // List of all cell's neighbors
-        internal readonly Cell[] CellNeighborhood;
+        internal Cell[] CellNeighborhood;
 
         protected Rule(Cell nextState, Cell[] cellNeighborhood)
         {

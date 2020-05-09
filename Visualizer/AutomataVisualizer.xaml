@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Visualizer.AutomataVisualizer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Visualizer"
+             mc:Ignorable="d" 
+             d:DesignHeight="720" d:DesignWidth="1280">
+    <Grid>
+        <ScrollViewer Name="GameFieldScroll" Height="600" VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden">
+            <Canvas MouseWheel="DisableWheelScroll" Name="GameField" Height="700" Width="1280" VerticalAlignment="Top">
+            </Canvas>
+        </ScrollViewer>
+        <Button Click="UpdateAutomataBtnClick" Content="Update" Margin="464,636,650,0" VerticalAlignment="Top" Height="44"/>
+        <Button Click="StartAutomata" Content="Play" Margin="649,636,465,0" VerticalAlignment="Top" Height="44"/>
+    </Grid>
+
+</UserControl>

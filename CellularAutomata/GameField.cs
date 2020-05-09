@@ -57,20 +57,14 @@ namespace CellularAutomata
 
             for (int i = 0; i < _neighborhoodCoords.Length; i++)
             {
-                // 1D automata - only one coordinate
                 try
                 {
                     if (_isInfinite)
-                    {
                         neighborhood[i] = Cells[(yCoordinate + (_neighborhoodCoords[i].Length >= 2 ? _neighborhoodCoords[i][1] : 0) + Cells.Length) % Cells.Length]
                                                 [(xCoordinate + _neighborhoodCoords[i][0] + Cells[0].Length) % Cells[0].Length];
-                        }
                     else
-                    {
-                        
                         neighborhood[i] = Cells[yCoordinate + (_neighborhoodCoords[i].Length >= 2 ? _neighborhoodCoords[i][1] : 0)]
                                                 [xCoordinate + _neighborhoodCoords[i][0]];
-                    }
                 }
                 catch (IndexOutOfRangeException)
                 {
