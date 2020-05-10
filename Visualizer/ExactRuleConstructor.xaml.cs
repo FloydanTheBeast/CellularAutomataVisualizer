@@ -56,14 +56,12 @@ namespace Visualizer
 
             SetBinding(CellNeighborhoodProperty, neighborhoodBinding);
 
-            Binding ruleBinding = new Binding();
+            Binding ruleCollectionBinding = new Binding();
 
-            ruleBinding.Path = new PropertyPath($"RuleSet[{collectionIndex}]");
-            ruleBinding.Mode = BindingMode.TwoWay;
+            ruleCollectionBinding.Path = new PropertyPath($"RuleSet[{collectionIndex}]");
+            ruleCollectionBinding.Mode = BindingMode.TwoWay;
 
-            SetBinding(CurrentRuleProperty, ruleBinding);
-
-            /*PropertyChanged += (obj, e) => MessageBox.Show("TEST");*/
+            SetBinding(CurrentRuleProperty, ruleCollectionBinding);
         }
 
         public void CreateView()

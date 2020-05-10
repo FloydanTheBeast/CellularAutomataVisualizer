@@ -25,7 +25,6 @@ namespace Visualizer
         {
             InitializeComponent();
             ResizeMode = ResizeMode.NoResize;
-            automataVisualizer = new AutomataVisualizer();
         }
 
         private void NavigateToConstructor(object sender, RoutedEventArgs e)
@@ -35,7 +34,7 @@ namespace Visualizer
 
         private void NavigateToVisualizer(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(automataVisualizer);
+            
         }
     }
 }

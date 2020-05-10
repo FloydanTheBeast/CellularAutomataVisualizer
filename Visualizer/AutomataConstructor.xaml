@@ -9,22 +9,30 @@
       Title="AutomataConstructor">
 
     <Grid>
-        <ScrollViewer HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="1280">
+        <ScrollViewer HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="1200">
             <StackPanel>
                 <StackPanel Height="100" VerticalAlignment="Top" Orientation="Horizontal">
-                    <RadioButton IsChecked="{Binding Path=IsInfinite, Mode=OneWayToSource}" Content="Конечное" Margin="50,0,0,0" VerticalAlignment="Center"
+                    <RadioButton IsChecked="{Binding Path=IsInfinite, Mode=OneWayToSource}" Content="Finite" Margin="50,0,0,0" VerticalAlignment="Center"
                                  FontSize="20" VerticalContentAlignment="Center" GroupName="FieldType"/>
-                    <RadioButton IsChecked="True" Content="Бесконечное" Margin="50,0,0,0" VerticalAlignment="Center"
+                    <RadioButton IsChecked="True" Content="Infinite" Margin="50,0,0,0" VerticalAlignment="Center"
                                  FontSize="20" VerticalContentAlignment="Center" GroupName="FieldType"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Label FontSize="20" Margin="50,0,50,0">Field size:</Label>
+                    <ComboBox SelectedValue="{Binding Path=FieldSize}" Width="100">
+                        <ComboBoxItem>Small</ComboBoxItem>
+                        <ComboBoxItem>Madium</ComboBoxItem>
+                        <ComboBoxItem>Large</ComboBoxItem>
+                    </ComboBox>
                 </StackPanel>
                 <StackPanel VerticalAlignment="Top" Height="Auto">
                     <uc:NeighborhoodPicker x:Name="NeighborhoodPicker" />
                 </StackPanel>
-                <StackPanel>
+                <StackPanel Margin="0,0,0,40">
                     <uc:RuleSetConstructor x:Name="RuleSetConstructor" Tag="{Binding ElementName=NeighborhoodPicker, Path=SelectedNeighborhood, Mode=OneWay}" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-
+        <Button Click="ConstructAutomata" HorizontalAlignment="Right" Width="80" Background="LightGreen">Construct</Button>
     </Grid>
 </Page>

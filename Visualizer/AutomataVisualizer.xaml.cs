@@ -23,7 +23,7 @@ namespace Visualizer
     /// </summary>
     public partial class AutomataVisualizer : UserControl
     {
-        readonly int cellSize = 8;
+        readonly int cellSize = 6;
 
         readonly int width;
 
@@ -40,9 +40,12 @@ namespace Visualizer
 
         DispatcherTimer timer = new DispatcherTimer();
 
-        public AutomataVisualizer()
+        public AutomataVisualizer(int cellSize, bool isInfitine, RuleSet ruleSet, int[][] neighborhood)
         {
             InitializeComponent();
+
+            this.ruleSet = ruleSet;
+            this.cellSize = cellSize;
 
             // Size of gameField in cells
             width = (int)GameField.Width / cellSize;
@@ -55,16 +58,17 @@ namespace Visualizer
                 new XorRule(30)
             }, new Cell(), true);*/
 
-            ruleSet = Automata2D.ruleGolB3S35;
+            /*ruleSet = Automata2D.ruleGolB3S35;*/
 
-            /*ruleSet = new RuleSet(new[]
+            /*this.ruleSet = new RuleSet(new[]
             {
-                new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3, new Cell()),
-                new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3 || x == 2, new Cell(true))
+                new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 1, new Cell()),
+                *//*new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3 || x == 2, new Cell(true))*//*
             }, new Cell(), true);*/
 
             Cell[][] startingField = CellListGenerator.GenerateRandom(width, height);
-            /*startingField[0][width / 2] = new Cell(true);*/
+            /*startingField[5][5] = new Cell(true);*/
+            /*startingField[5][6] = new Cell(true);*/
 
             /*gameField = new GameField(startingField, new[] { new[] { -1 }, new[] { 0 }, new[] { 1 } }, true);*/
 
@@ -74,18 +78,7 @@ namespace Visualizer
             startingField[2][3] = new Cell(true);
             startingField[1][3] = new Cell(true);*/
 
-            gameField = new GameField(startingField, new[]
-            {
-                new [] {-1, -1},
-                new [] {-1, 0},
-                new [] {-1, 1},
-                new [] {0, -1},
-                new [] {0, 0},
-                new [] {0, 1},
-                new [] {1, -1},
-                new [] {1, 0},
-                new [] {1, 1},
-            }, true);
+            gameField = new GameField(startingField, neighborhood, true);
 
             isOneDimensional = gameField.Cells.Length == 1;
 

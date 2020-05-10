@@ -64,7 +64,7 @@ namespace Visualizer
                     }
                     else if (e.NewItems[0] is NearbyNeighborsRule)
                     {
-                        NearbyNeighborsRuleConstructor ruleConstructor = new NearbyNeighborsRuleConstructor();
+                        NearbyNeighborsRuleConstructor ruleConstructor = new NearbyNeighborsRuleConstructor(e.NewStartingIndex);
                         RuleListView.Items.Add(ruleConstructor);
                     }
                     break;
