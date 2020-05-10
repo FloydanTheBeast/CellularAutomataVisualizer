@@ -22,11 +22,14 @@ namespace ConsoleTestingApp
 
             do
             {
+                var watch = System.Diagnostics.Stopwatch.StartNew();
                 Console.Clear();
                 Automata2D.gameField.PrintToConsole();
                 Automata2D.gameField.ChangeField(
                     Automata2D.ruleGol
                 );
+                watch.Stop();
+                Console.WriteLine(watch.ElapsedMilliseconds);
             } while (Console.ReadKey().Key != ConsoleKey.Escape);
         }
     }

@@ -7,8 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
-        <ScrollViewer Name="GameFieldScroll" Height="600" VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden">
-            <Canvas MouseWheel="DisableWheelScroll" Name="GameField" Height="700" Width="1280" VerticalAlignment="Top">
+        <ScrollViewer Name="GameFieldScroll" Height="720" VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden">
+            <Canvas MouseWheel="DisableWheelScroll" Name="GameField" Height="608" Width="1280" VerticalAlignment="Top">
             </Canvas>
         </ScrollViewer>
         <Button Click="UpdateAutomataBtnClick" Content="Update" Margin="464,636,650,0" VerticalAlignment="Top" Height="44"/>

@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Visualizer.NearbyNeighborsRuleConstructor"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Visualizer"
+             mc:Ignorable="d" 
+             d:DesignHeight="130" d:DesignWidth="600">
+    <StackPanel Orientation="Horizontal">
+        <StackPanel Width="200" Orientation="Vertical">
+            <Label Content="Starting state" Height="35" VerticalContentAlignment="Center" FontSize="16"/>
+            <Canvas Name="StartingStateCanvas" Width="50" Height="50" Margin="0,20,0,25"/>
+        </StackPanel>
+        <StackPanel Width="200">
+            <Label Content="Condition" Height="35" VerticalContentAlignment="Center" Margin="0,0,0,12" FontSize="16"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel >
+                    <Label Content="Lower bound (⩾)" FontSize="12"/>
+                    <TextBox Width="80" PreviewTextInput="BoundaryInput" Text="{Binding Path=LowerBound, Mode=OneWayToSource}" />
+                </StackPanel>
+                <StackPanel>
+                    <Label Content="Upper bound (⩽)" FontSize="12"/>
+                    <TextBox Width="80" PreviewTextInput="BoundaryInput" Text="{Binding Path=UpperBound, Mode=OneWayToSource}" />
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Width="200">
+            <Label Content="Edning state" Height="35" VerticalContentAlignment="Center" FontSize="16"/>
+            <Canvas Name="EndingStateCanvas" Width="50" Height="50" Margin="0,20,0,25"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

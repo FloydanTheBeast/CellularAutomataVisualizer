@@ -14,6 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CellularAutomata;
+using TestingLibrary;
 
 namespace Visualizer
 {
@@ -35,7 +36,7 @@ namespace Visualizer
         readonly RuleSet ruleSet;
 
         // Delay before next update
-        double delay = 0.025;
+        double delay = 0.0125;
 
         DispatcherTimer timer = new DispatcherTimer();
 
@@ -50,9 +51,11 @@ namespace Visualizer
             timer.Tick += (object sender, EventArgs e) => UpdateAutomata();
             timer.Interval = new TimeSpan((int)(delay * TimeSpan.TicksPerSecond));
 
-            ruleSet = new RuleSet(new Rule[] {
+            /*ruleSet = new RuleSet(new Rule[] {
                 new XorRule(30)
-            }, new Cell(), true);
+            }, new Cell(), true);*/
+
+            ruleSet = Automata2D.ruleGolB3S35;
 
             /*ruleSet = new RuleSet(new[]
             {
@@ -60,10 +63,10 @@ namespace Visualizer
                 new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3 || x == 2, new Cell(true))
             }, new Cell(), true);*/
 
-            Cell[][] startingField = CellListGenerator.Generate(width);
-            startingField[0][width / 2] = new Cell(true);
+            Cell[][] startingField = CellListGenerator.GenerateRandom(width, height);
+            /*startingField[0][width / 2] = new Cell(true);*/
 
-            gameField = new GameField(startingField, new[] { new[] { -1 }, new[] { 0 }, new[] { 1 } }, true);
+            /*gameField = new GameField(startingField, new[] { new[] { -1 }, new[] { 0 }, new[] { 1 } }, true);*/
 
             /*startingField[2][1] = new Cell(true);
             startingField[3][2] = new Cell(true);
@@ -71,9 +74,7 @@ namespace Visualizer
             startingField[2][3] = new Cell(true);
             startingField[1][3] = new Cell(true);*/
 
-            isOneDimensional = gameField.Cells.Length == 1;
-
-            /*gameField = new GameField(startingField, new[]
+            gameField = new GameField(startingField, new[]
             {
                 new [] {-1, -1},
                 new [] {-1, 0},
@@ -84,7 +85,9 @@ namespace Visualizer
                 new [] {1, -1},
                 new [] {1, 0},
                 new [] {1, 1},
-            }, true);*/
+            }, true);
+
+            isOneDimensional = gameField.Cells.Length == 1;
 
             DrawAutomata();
         }
@@ -98,11 +101,36 @@ namespace Visualizer
                 for (int j = 0; j < gameField.Cells[i].Length; j++)
                 {
                     Rectangle cellRect = CellToRectangle(gameField.Cells[i][j]);
+                    cellRect.Tag = (bool)gameField.Cells[i][j]["isAlive"];
                     Canvas.SetLeft(cellRect, j * cellSize);
-                    Canvas.SetTop(cellRect, i + (isOneDimensional ? gameField.CurrentGeneration : 0) * cellSize);
+                    Canvas.SetTop(cellRect, (i + (isOneDimensional ? gameField.CurrentGeneration : 0)) * cellSize);
                     GameField.Children.Add(cellRect);
                 }
             }   
+        }
+
+        public void UpdateAutomataView()
+        {
+            for (int i = 0; i < gameField.Cells.Length; i++)
+            {
+                for (int j = 0; j < gameField.Cells[i].Length; j++)
+                {
+                    // If cell's state has changed
+                    if ((bool)gameField.Cells[i][j]["isAlive"] != (bool)((Rectangle)GameField.Children[i * width + j]).Tag)
+                        ToggleRectangle(j, i);
+                }
+            }
+        }
+
+        void ToggleRectangle(int xCoord, int yCoord)
+        {
+            Rectangle cellRect = (Rectangle)GameField.Children[yCoord * width + xCoord];
+
+            cellRect.Tag = !(bool)cellRect.Tag;
+
+            cellRect.Fill = (bool)cellRect.Tag ?
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#34495e")) :
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ecf0f1"));
         }
 
         // TODO: Move to utilities
@@ -136,8 +164,7 @@ namespace Visualizer
 
             switch (isOneDimensional)
             {
-                // 1D automata
-                case true:
+                case true: // 1D automata
                     if (gameField.CurrentGeneration > height)
                     {
                         GameField.Height += cellSize;
@@ -146,10 +173,9 @@ namespace Visualizer
                     }
                     DrawAutomata();
                     break;
-                // 2D automata
-                case false:
+                case false: // 2D automata
                     /*GameField.Children.Clear();*/
-                    DrawAutomata();
+                    UpdateAutomataView();
                     break;
             }
         }

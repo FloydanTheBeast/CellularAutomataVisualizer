@@ -10,12 +10,12 @@
         <StackPanel HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="800" Orientation="Horizontal">
             <ComboBox Name="RuleTypePicker" Width="150" VerticalAlignment="Center" Height="24" Margin="20,0,0,0">
                 <ComboBoxItem Tag="ExactPattern">Exact pattern</ComboBoxItem>
-                <ComboBoxItem Tag="NumberOfNeighbors">Number of neighbours</ComboBoxItem>
+                <ComboBoxItem Tag="NearbyNeighbors">Nearby neighbors</ComboBoxItem>
             </ComboBox>
             <Button Content="Add new rule" Width="100" Height="24" Margin="8" Click="CreateRuleBtnClick"/>
         </StackPanel>
 
-        <ListView Name="RuleListView" HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="600" Margin="20,60,0,0">
+        <ListView Name="RuleListView" HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="650" Margin="20,60,0,0">
         </ListView>
     </Grid>
 </UserControl>

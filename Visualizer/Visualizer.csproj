@@ -60,6 +60,9 @@
     <Compile Include="ExactRuleConstructor.xaml.cs">
       <DependentUpon>ExactRuleConstructor.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NearbyNeighborsRuleConstructor.xaml.cs">
+      <DependentUpon>NearbyNeighborsRuleConstructor.xaml</DependentUpon>
+    </Compile>
     <Compile Include="RuleSetConstructor.xaml.cs">
       <DependentUpon>RuleSetConstructor.xaml</DependentUpon>
     </Compile>
@@ -68,6 +71,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExactRuleConstructor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="NearbyNeighborsRuleConstructor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -135,6 +142,10 @@
     <ProjectReference Include="..\CellularAutomata\CellularAutomata.csproj">
       <Project>{94f8190b-ee06-46b2-b35f-b0856b0fee0c}</Project>
       <Name>CellularAutomata</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\TestingLibrary\TestingLibrary.csproj">
+      <Project>{54d1b4e1-b473-4831-bf6c-23c173c7426f}</Project>
+      <Name>TestingLibrary</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

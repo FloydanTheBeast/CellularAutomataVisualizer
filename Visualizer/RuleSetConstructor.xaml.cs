@@ -33,6 +33,14 @@ namespace Visualizer
                     case "ExactPattern":
                         RuleSet.Add(new ExactPatternRule(new Cell(), 9));
                         break;
+                    case "NearbyNeighbors":
+                        RuleSet.Add(new NearbyNeighborsRule(
+                            new Cell(true),
+                            "isAlive",
+                            true,
+                            x => x >= 0 && x <= 8
+                        ));
+                        break;
                     default:
                         MessageBox.Show("There is no such rule", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                         break;
@@ -49,8 +57,16 @@ namespace Visualizer
             switch (e.Action)
             {
                 case NotifyCollectionChangedAction.Add: // если добавление
-                    ExactRuleConstructor ruleConstructor = new ExactRuleConstructor(e.NewStartingIndex);
-                    RuleListView.Items.Add(ruleConstructor);
+                    if (e.NewItems[0] is ExactPatternRule)
+                    {
+                        ExactRuleConstructor ruleConstructor = new ExactRuleConstructor(e.NewStartingIndex);
+                        RuleListView.Items.Add(ruleConstructor);
+                    }
+                    else if (e.NewItems[0] is NearbyNeighborsRule)
+                    {
+                        NearbyNeighborsRuleConstructor ruleConstructor = new NearbyNeighborsRuleConstructor();
+                        RuleListView.Items.Add(ruleConstructor);
+                    }
                     break;
 /*                case NotifyCollectionChangedAction.Remove: // если удаление
                     User oldUser = e.OldItems[0] as User;

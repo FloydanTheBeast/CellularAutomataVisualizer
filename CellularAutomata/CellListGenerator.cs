@@ -4,6 +4,7 @@ namespace CellularAutomata
 {
     public static class CellListGenerator
     {
+        static Random rnd = new Random();
         public static Cell[][] Generate(int width, int height = 1)
         {
             if (height < 1)
@@ -32,7 +33,7 @@ namespace CellularAutomata
             {
                 cellList[i] = new Cell[width];
                 for (int j = 0; j < width; j++)
-                    cellList[i][j] = new Random().Next() == 0 ? new Cell() : new Cell(true);
+                    cellList[i][j] = rnd.NextDouble() > 0.5 ? new Cell() : new Cell(true);
             }
 
             return cellList;

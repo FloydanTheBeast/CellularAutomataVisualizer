@@ -16,7 +16,7 @@ namespace TestingLibrary
 
         static Automata2D()
         {
-            startingField = CellListGenerator.GenerateRandom(20, 20);
+            startingField = CellListGenerator.GenerateRandom(100, 50);
 
             ruleGol = new RuleSet(new[]
 {
@@ -24,7 +24,7 @@ namespace TestingLibrary
                 new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3 || x == 2, new Cell(true))
             }, new Cell(), true);
 
-            GameField gameField = new GameField(startingField, new[]
+            gameField = new GameField(startingField, new[]
             {
                 new [] {-1, -1},
                 new [] {-1, 0},
