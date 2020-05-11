@@ -63,8 +63,19 @@ namespace CellularAutomata
                         neighborhood[i] = Cells[(yCoordinate + (_neighborhoodCoords[i].Length >= 2 ? _neighborhoodCoords[i][1] : 0) + Cells.Length) % Cells.Length]
                                                 [(xCoordinate + _neighborhoodCoords[i][0] + Cells[0].Length) % Cells[0].Length];
                     else
-                        neighborhood[i] = Cells[yCoordinate + (_neighborhoodCoords[i].Length >= 2 ? _neighborhoodCoords[i][1] : 0)]
-                                                [xCoordinate + _neighborhoodCoords[i][0]];
+                    {
+                        int newYCoordinate = yCoordinate + (_neighborhoodCoords[i].Length >= 2 ? _neighborhoodCoords[i][1] : 0);
+                        int newXCoordinate = xCoordinate + _neighborhoodCoords[i][0];
+
+                        if (newYCoordinate >= 0 && newYCoordinate < Cells.Length &&
+                            newXCoordinate >= 0 && newXCoordinate < Cells[i].Length)
+                        {
+                            neighborhood[i] = Cells[yCoordinate + (_neighborhoodCoords[i].Length >= 2 ? _neighborhoodCoords[i][1] : 0)]
+                                            [xCoordinate + _neighborhoodCoords[i][0]];
+                        }
+                        else
+                            neighborhood[i] = new Cell();
+                    }
                 }
                 catch (IndexOutOfRangeException)
                 {
