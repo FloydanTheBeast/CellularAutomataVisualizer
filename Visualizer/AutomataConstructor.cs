@@ -8,6 +8,7 @@ using System.IO;
 using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Visualizer
 {
@@ -41,14 +42,41 @@ namespace Visualizer
         void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        private void ConstructAutomata(object sender, RoutedEventArgs e)
+
+        bool Deserialize()
         {
-            if (RuleSetConstructor.RuleSet.Count == 0)
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.TypeNameHandling = TypeNameHandling.All;
+
+            try
             {
-                MessageBox.Show("Rule set can't be empty", "Can't costruct an automata", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-                return;
+                using (StreamReader sr = new StreamReader("test.json"))
+                {
+                    using (JsonReader reader = new JsonTextReader(sr))
+                    {
+                        Automata automata = (Automata)serializer.Deserialize(sr, typeof(Automata));
+
+                        RuleSetConstructor.RuleSet.Clear();
+
+                        IsInfinite = automata._isInfinite;
+                        NeighborhoodPicker.SelectedNeighborhood = automata._neighborhood;
+
+                        foreach (var item in new ObservableCollection<Rule>(new List<Rule>(automata._ruleSet.Rules)))
+                            RuleSetConstructor.RuleSet.Add(item);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Ошибка при загрузке");
+                return false;
             }
 
+            return true;
+        }
+
+        Automata ConstructAutomata()
+        {
             Rule[] ruleArray = new List<Rule>(RuleSetConstructor.RuleSet).ToArray();
             int[][] neighborhood = NeighborhoodPicker.SelectedNeighborhood;
 
@@ -73,36 +101,9 @@ namespace Visualizer
                     break;
             }
 
-            Automata automata = new Automata(cellSize, IsInfinite, neighborhood, ruleSet);
-            Serialize(automata);
-
-            MessageBox.Show("Automata has been constructed successfuly", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            NavigationService.Navigate(new AutomataVisualizer(cellSize, IsInfinite, ruleSet, neighborhood));
+            return new Automata(cellSize, IsInfinite, neighborhood, ruleSet);
         }
 
-        void Deserialize()
-        {
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.TypeNameHandling = TypeNameHandling.All;
-
-            using (StreamReader sr = new StreamReader("test.json"))
-            {
-                using (JsonReader reader = new JsonTextReader(sr))
-                {
-                    Automata a = (Automata)serializer.Deserialize(sr, typeof(Automata));
-                    RuleSetConstructor.RuleSet.Clear();
-
-                    IsInfinite = a._isInfinite;
-
-                    foreach (var item in new ObservableCollection<Rule>(new List<Rule>(a._ruleSet.Rules)))
-                        RuleSetConstructor.RuleSet.Add(item);
-
-                    NeighborhoodPicker.SelectedNeighborhood = a._neighborhood;
-
-                    MessageBox.Show("Successful deserialization");
-                }
-            }
-        }
 
         void Serialize(Automata automata)
         {
@@ -112,24 +113,47 @@ namespace Visualizer
             try
             {
                 using (StreamWriter sw = new StreamWriter("test.json"))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                    {
+                    using (JsonWriter writer = new JsonTextWriter(sw))                
                         serializer.Serialize(writer, automata);
-                        MessageBox.Show("Success");
-                    }
-
-                return;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+
+            MessageBox.Show("Successfuly saved the automata", "Successfuly", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
-        private void LoadAutomata(object sender, RoutedEventArgs e)
+
+        async private void LoadAutomata(object sender, RoutedEventArgs e)
         {
             Deserialize();
+            await Task.Delay(1);
             RuleSetConstructor.UpdateViews();
+        }
+
+
+        private void SaveAutomata(object sender, RoutedEventArgs e)
+        {
+            if (RuleSetConstructor.RuleSet.Count == 0)
+            {
+                MessageBox.Show("Rule set can't be empty", "Can't costruct an automata", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
+            Serialize(ConstructAutomata());
+        }
+
+
+        private void VisualizeAutomata(object sender, RoutedEventArgs e)
+        {
+            if (RuleSetConstructor.RuleSet.Count == 0)
+            {
+                MessageBox.Show("Rule set can't be empty", "Can't costruct an automata", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                return;
+            }
+
+            NavigationService.Navigate(new AutomataVisualizer(ConstructAutomata()));
         }
     }
 }

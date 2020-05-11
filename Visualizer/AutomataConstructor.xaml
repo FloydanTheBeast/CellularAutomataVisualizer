@@ -9,7 +9,7 @@
       Title="AutomataConstructor">
 
     <Grid>
-        <ScrollViewer HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="1200">
+        <ScrollViewer HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="1280">
             <StackPanel>
                 <StackPanel Height="100" VerticalAlignment="Top" Orientation="Horizontal">
                     <CheckBox IsChecked="{Binding Path=IsInfinite, Mode=TwoWay}" Content="Is infinite" Margin="50,0,0,0" VerticalAlignment="Center"
@@ -23,17 +23,19 @@
                         <ComboBoxItem>Large</ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
-                <StackPanel VerticalAlignment="Top" Height="Auto">
-                    <uc:NeighborhoodPicker x:Name="NeighborhoodPicker" />
+                <StackPanel VerticalAlignment="Top" Height="Auto" Width="800" HorizontalAlignment="Left">
+                    <uc:NeighborhoodPicker x:Name="NeighborhoodPicker" Margin="0, 40"/>
                 </StackPanel>
                 <StackPanel Margin="0,0,0,40">
-                    <uc:RuleSetConstructor x:Name="RuleSetConstructor" Tag="{Binding ElementName=NeighborhoodPicker, Path=SelectedNeighborhood, Mode=OneWay}" />
+                    <uc:RuleSetConstructor Margin="40" x:Name="RuleSetConstructor" 
+                                           Tag="{Binding ElementName=NeighborhoodPicker, Path=SelectedNeighborhood, Mode=OneWay}" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        <StackPanel>
-            <Button Click="LoadAutomata" HorizontalAlignment="Right" Width="80" Background="LightGray" Height="200">Construct</Button>
-            <Button Click="ConstructAutomata" HorizontalAlignment="Right" Width="80" Background="LightGreen" Height="200">Construct</Button>
+        <StackPanel Margin="0,0,20,0" Width="360" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
+            <Button Click="SaveAutomata" HorizontalAlignment="Right" Width="120" Background="#f6e58d" Height="80">Save</Button>
+            <Button Click="LoadAutomata" HorizontalAlignment="Right" Width="120" Background="#f6e58d" Height="80">Load</Button>
+            <Button Click="VisualizeAutomata" HorizontalAlignment="Right" Width="120" Background="LightGreen" Height="80">Visualize</Button>
         </StackPanel>
     </Grid>
 </Page>

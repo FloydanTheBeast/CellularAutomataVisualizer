@@ -4,13 +4,15 @@ using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using CellularAutomata;
 using System.Collections.Specialized;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Visualizer
 {
     /// <summary>
     /// Логика взаимодействия для RuleSetConstructor.xaml
     /// </summary>
-    public partial class RuleSetConstructor : UserControl
+    public partial class RuleSetConstructor : UserControl, INotifyPropertyChanged
     {
         public ObservableCollection<Rule> RuleSet { get; set; }
 
@@ -22,12 +24,16 @@ namespace Visualizer
             RuleSet.CollectionChanged += RuleSetCollectionChanged;
         }
 
+ 
         public void UpdateViews()
         {
+            OnPropertyChanged();
+
             foreach (var item in RuleListView.Items)
             {
                 if (item is ExactRuleConstructor)
                     ((ExactRuleConstructor)item).CreateView();
+                
                 else if (item is NearbyNeighborsRuleConstructor)
                     ((NearbyNeighborsRuleConstructor)item).UpdateView();
             }
@@ -91,5 +97,9 @@ namespace Visualizer
                     break;*/
             }
         }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

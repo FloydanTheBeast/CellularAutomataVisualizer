@@ -40,12 +40,12 @@ namespace Visualizer
 
         DispatcherTimer timer = new DispatcherTimer();
 
-        public AutomataVisualizer(int cellSize, bool isInfitine, RuleSet ruleSet, int[][] neighborhood)
+        public AutomataVisualizer(Automata automata)
         {
             InitializeComponent();
 
-            this.ruleSet = ruleSet;
-            this.cellSize = cellSize;
+            ruleSet = automata._ruleSet;
+            cellSize = automata._cellSize;
 
             // Size of gameField in cells
             width = (int)GameField.Width / cellSize;
@@ -78,14 +78,20 @@ namespace Visualizer
             startingField[2][3] = new Cell(true);
             startingField[1][3] = new Cell(true);*/
 
-            gameField = new GameField(startingField, neighborhood, true);
+            gameField = new GameField(
+                startingField,
+                automata._neighborhood,
+                automata._isInfinite
+            );
 
             isOneDimensional = gameField.Cells.Length == 1;
 
             DrawAutomata();
         }
 
-        private void DisableWheelScroll(object sender, MouseWheelEventArgs e) => e.Handled = true;
+        // Guess what, dumbass
+        private void DisableWheelScroll(object sender, MouseWheelEventArgs e)
+            => e.Handled = true;
 
         public void DrawAutomata()
         {

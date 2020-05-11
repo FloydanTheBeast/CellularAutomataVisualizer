@@ -26,7 +26,7 @@ namespace Visualizer
     {
         public static readonly DependencyProperty CurrentRuleProperty;
 
-        BindingExpressionBase CurrentRuleBinding;
+        public BindingExpressionBase CurrentRuleBinding;
 
         public NearbyNeighborsRule CurrentRule
         {
@@ -61,8 +61,6 @@ namespace Visualizer
 
             CurrentRuleBinding = SetBinding(CurrentRuleProperty, ruleCollectionBinding);
 
-            /*OnPropertyChanged("CurrentRule");*/
-
             StartingStateCanvas.Children.Add(GenerateRect(
                     (int)StartingStateCanvas.Width, (bool)CurrentRule.CenterCellState["isAlive"]
             ));
@@ -70,8 +68,6 @@ namespace Visualizer
             EndingStateCanvas.Children.Add(GenerateRect(
                     (int)StartingStateCanvas.Width, (bool)CurrentRule.NextState["isAlive"]
             ));
-
-            /*UpdateView();*/
         }
 
         static NearbyNeighborsRuleConstructor()
@@ -95,8 +91,6 @@ namespace Visualizer
 
         public void UpdateView()
         {
-            CurrentRuleBinding.UpdateTarget();
-
             Rectangle startingStateRect = (Rectangle)StartingStateCanvas.Children[0];
 
             startingStateRect.Tag = (bool)CurrentRule.CenterCellState["isAlive"];

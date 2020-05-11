@@ -20,16 +20,21 @@ namespace Visualizer
     /// </summary>
     public partial class MainWindow : Window
     {
-        AutomataVisualizer automataVisualizer;
+        AutomataConstructor automataConstructor;
+        
         public MainWindow()
         {
             InitializeComponent();
             ResizeMode = ResizeMode.NoResize;
+
+            automataConstructor = new AutomataConstructor();
+
+            MainFrame.Navigate(automataConstructor);
         }
 
         private void NavigateToConstructor(object sender, RoutedEventArgs e)
         {
-            MainFrame.Navigate(new AutomataConstructor());
+            
         }
 
         private void NavigateToVisualizer(object sender, RoutedEventArgs e)
