@@ -18,7 +18,7 @@ namespace CellularAutomata
         public Cell NextState;
 
         // List of all cell's neighbors
-        internal Cell[] CellNeighborhood;
+        public Cell[] CellNeighborhood;
 
         protected Rule(Cell nextState, Cell[] cellNeighborhood)
         {

@@ -6,10 +6,10 @@ namespace CellularAutomata
 {
     public class NearbyNeighborsRule : Rule
     {
-        readonly string _propertyName;
-        readonly object _propertyValue;
-        readonly Func<int, bool> _conditionFunc;
-        readonly Cell _centerCellState;
+        public readonly string _propertyName;
+        public readonly object _propertyValue;
+        public readonly Func<int, bool> _conditionFunc;
+        public readonly Cell _centerCellState;
 
         /// <summary>
         /// Public constructor

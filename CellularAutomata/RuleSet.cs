@@ -9,13 +9,13 @@ namespace CellularAutomata
     public class RuleSet
     {
         // List of all rules
-        readonly Rule[] _ruleSet;
+        public readonly Rule[] _ruleSet;
         
-        readonly Cell _defaultCellProperties;
+        public readonly Cell _defaultCellProperties;
 
         // If true then cell will update to default
         // if no proper rule was found (if EmptyRule was returned) 
-        readonly bool _shouldCellUpdateToDefault;
+        public readonly bool _shouldCellUpdateToDefault;
         
         public RuleSet(Rule[] ruleSet, Cell defaultCellProperties, bool shouldCellUpdateToDefault = false)
         {

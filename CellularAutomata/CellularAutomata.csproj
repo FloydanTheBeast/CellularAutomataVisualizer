@@ -43,7 +43,7 @@
   <ItemGroup>
     <Compile Include="Cell.cs" />
     <Compile Include="CellListGenerator.cs" />
-    <Compile Include="CellularAutomata.cs" />
+    <Compile Include="Automata.cs" />
     <Compile Include="EmptyRule.cs" />
     <Compile Include="ExactPatternRule.cs" />
     <Compile Include="GameField.cs" />

@@ -19,7 +19,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label FontSize="20" Margin="50,0,50,0">Field size:</Label>
-                    <ComboBox SelectedValue="{Binding Path=FieldSize}" Width="100">
+                    <ComboBox SelectedIndex="{Binding Path=Size, Mode=TwoWay}" Width="100">
                         <ComboBoxItem>Small</ComboBoxItem>
                         <ComboBoxItem>Madium</ComboBoxItem>
                         <ComboBoxItem>Large</ComboBoxItem>
