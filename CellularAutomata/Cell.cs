@@ -31,7 +31,7 @@ namespace CellularAutomata
         /// <param name="propertiesNames">Array of properties names</param>
         /// <param name="propertiesValues">Array of properties values</param>
         /// <exception cref="ArgumentException">Length of two passed arrays should be the same</exception>
-        public Cell(string[] propertiesNames, object[] propertiesValues)
+        /*public Cell(string[] propertiesNames, object[] propertiesValues)
         {
             // TODO: Join with _properties 
             
@@ -40,7 +40,7 @@ namespace CellularAutomata
             
             Properties = propertiesNames?.Select((name, index) => new {Key = name, Index = index})
                 .ToDictionary(x => x.Key, x => propertiesValues?[x.Index]);
-        }
+        }*/
         
         // TODO: Delete constructor 
         public Cell(bool isAlive = false)

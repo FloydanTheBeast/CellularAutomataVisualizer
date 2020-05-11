@@ -6,10 +6,28 @@ namespace CellularAutomata
 {
     public class NearbyNeighborsRule : Rule
     {
-        public readonly string _propertyName;
-        public readonly object _propertyValue;
-        public readonly Func<int, bool> _conditionFunc;
-        public readonly Cell _centerCellState;
+        public string PropertyName { get; set; }
+        public object PropertyValue { get; set; }
+        public Cell CenterCellState { get; set; }
+
+        int _lowerBound;
+        public int LowerBound {
+            get => _lowerBound;
+            set
+            {
+                _lowerBound = value >= 0 ? value : 0;
+            }
+        }
+
+        int _upperBound;
+        public int UpperBound
+        {
+            get => _upperBound;
+            set
+            {
+                _upperBound = value >= 0 ? value : 0;
+            }
+        }
 
         /// <summary>
         /// Public constructor
@@ -17,18 +35,26 @@ namespace CellularAutomata
         /// <param name="nextState">Next state of a cell</param>
         /// <param name="propertyName">Name of a property to be counted</param>
         /// <param name="propertyValue">Required value of a property</param>
-        /// <param name="conditionFunc">Predicate that accepts a number of properties
-        /// that has been counter and returns a boolean depending on a condition</param>
         /// <param name="centerCellState">(Optional) Required state of a center cell</param>
         public NearbyNeighborsRule(Cell nextState, string propertyName, object propertyValue,
-            Func<int, bool> conditionFunc, Cell centerCellState = null)
+            int lowerBound, int upperBound, Cell centerCellState = null)
             : base(nextState)
         { 
-            _conditionFunc = conditionFunc;
-            _propertyValue = propertyValue;
-            _propertyName = propertyName;
-            _centerCellState = centerCellState;
+            PropertyValue = propertyValue;
+            PropertyName = propertyName;
+            LowerBound = lowerBound;
+            UpperBound = upperBound;
+            CenterCellState = centerCellState;
         }
+
+        /// <summary>
+        /// Checks suitability to a condition 
+        /// </summary>
+        /// <param name="x">Number of neighbors</param>
+        /// <returns>If x suits to a condition</returns>
+        public bool CheckCondition(int x) =>
+            (LowerBound < 0 || x >= LowerBound) &&
+            (UpperBound < 0 || x <= UpperBound);
 
         public new bool CheckSuitability(Cell[] cellNeighborhood)
         {
@@ -41,7 +67,7 @@ namespace CellularAutomata
             int centerCoords = cellNeighborhood.Length / 2;
 
             // Check if center cell has a required state
-            if (_centerCellState != null && _centerCellState != cellNeighborhood[centerCoords])
+            if (CenterCellState != null && CenterCellState != cellNeighborhood[centerCoords])
                 return false;
 
             // Number of cells from neighborhood with required property value  
@@ -49,12 +75,12 @@ namespace CellularAutomata
 
             for (int i = 0; i < cellNeighborhood.Length; i++)
                 // TODO: Check property type
-                if (i != centerCoords && (bool)cellNeighborhood[i].Properties[_propertyName] == (bool)_propertyValue)
+                if (i != centerCoords && (bool)cellNeighborhood[i].Properties[PropertyName] == (bool)PropertyValue)
                     propertyValueCounter++;
 
             // Console.WriteLine(propertyValueCounter);
             
-            return _conditionFunc(propertyValueCounter);
+            return CheckCondition(propertyValueCounter);
         }
     }
 }

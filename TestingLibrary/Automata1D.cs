@@ -26,7 +26,8 @@ namespace TestingLibrary
                     new Cell(true),
                     "isAlive",
                     true,
-                    x => x == 1
+                    1,
+                    1
                 )
             }, new Cell(), true);
 
@@ -34,7 +35,7 @@ namespace TestingLibrary
                 new XorRule(90)
             }, new Cell(), true);
 
-            exactRule30 = new RuleSet(new Rule[]
+           /* exactRule30 = new RuleSet(new Rule[]
 {
                 new ExactPatternRule(new Cell(true), new Cell[]
                 {
@@ -84,7 +85,7 @@ namespace TestingLibrary
                     new Cell(false),
                     new Cell(false)
                 }),
-            }, new Cell(), true);
+            }, new Cell(), true);*/
         }
     }
 }

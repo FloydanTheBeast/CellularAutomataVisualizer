@@ -26,6 +26,9 @@ namespace Visualizer
         public static readonly DependencyProperty CellNeighborhoodProperty;
         public static readonly DependencyProperty CurrentRuleProperty;
 
+        BindingExpressionBase CellNeighborhoodBinding;
+        BindingExpressionBase CurrentRuleBinding;
+
         // Coordinates of neighbors
         public int[][] CellNeighborhood
         {
@@ -50,18 +53,14 @@ namespace Visualizer
             InitializeComponent();
 
             Binding neighborhoodBinding = new Binding();
-
             neighborhoodBinding.Path = new PropertyPath("Tag");
             neighborhoodBinding.Mode = BindingMode.TwoWay;
-
-            SetBinding(CellNeighborhoodProperty, neighborhoodBinding);
+            CellNeighborhoodBinding = SetBinding(CellNeighborhoodProperty, neighborhoodBinding);
 
             Binding ruleCollectionBinding = new Binding();
-
             ruleCollectionBinding.Path = new PropertyPath($"RuleSet[{collectionIndex}]");
             ruleCollectionBinding.Mode = BindingMode.TwoWay;
-
-            SetBinding(CurrentRuleProperty, ruleCollectionBinding);
+            CurrentRuleBinding = SetBinding(CurrentRuleProperty, ruleCollectionBinding);
         }
 
         public void CreateView()

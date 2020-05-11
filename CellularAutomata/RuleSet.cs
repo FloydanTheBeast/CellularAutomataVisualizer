@@ -9,19 +9,19 @@ namespace CellularAutomata
     public class RuleSet
     {
         // List of all rules
-        public readonly Rule[] _ruleSet;
+        public Rule[] Rules { get; set; }
         
-        public readonly Cell _defaultCellProperties;
+        public Cell DefaultCellProperties { get; set; }
 
         // If true then cell will update to default
         // if no proper rule was found (if EmptyRule was returned) 
-        public readonly bool _shouldCellUpdateToDefault;
+        public bool ShouldCellUpdateToDefault { get; set; }
         
         public RuleSet(Rule[] ruleSet, Cell defaultCellProperties, bool shouldCellUpdateToDefault = false)
         {
-            _ruleSet = ruleSet;
-            _defaultCellProperties = defaultCellProperties;
-            _shouldCellUpdateToDefault = shouldCellUpdateToDefault;
+            Rules = ruleSet;
+            DefaultCellProperties = defaultCellProperties;
+            ShouldCellUpdateToDefault = shouldCellUpdateToDefault;
         }
         
         /// <summary>
@@ -31,11 +31,11 @@ namespace CellularAutomata
         /// <returns></returns>
         public Rule FindProperRule(Cell[] neighborhood)
         {
-            foreach (Rule rule in _ruleSet)
+            foreach (Rule rule in Rules)
                 if (rule.CheckSuitability(neighborhood))
                     return rule;
 
-            return new EmptyRule(_shouldCellUpdateToDefault);
+            return new EmptyRule(ShouldCellUpdateToDefault);
         }
 
     }

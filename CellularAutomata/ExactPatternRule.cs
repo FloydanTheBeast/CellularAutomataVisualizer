@@ -2,9 +2,6 @@
 {
     public class ExactPatternRule : Rule
     {
-        public ExactPatternRule(Cell nextState, Cell[] cellNeighborhood) 
-            : base(nextState, cellNeighborhood) {}
-
         /// <summary>
         /// Initialize ExactPatternRule with default cells
         /// </summary>

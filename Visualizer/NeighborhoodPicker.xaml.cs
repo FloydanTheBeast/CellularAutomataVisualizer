@@ -71,29 +71,31 @@ namespace Visualizer
             InitializeComponent();
             _cellSize = (int)(NeighborhoodVisualizer.Width / 3);
 
-            // Set default value to be Moore's neighborhood
+            // Update view if selectedNeighbor was changed
+            PropertyChanged += (obj, e) => DrawNeighborhood();
+
+            // Set default neighborhood to be Moore's
             TypePicker.SelectedIndex = 0;
         }
 
         private void TypeSelectHandler(object sender, SelectionChangedEventArgs e)
         {
-            ComboBox comboBox = (ComboBox)sender;
-            ComboBoxItem selectedItem = (ComboBoxItem)comboBox.SelectedItem;
+            if (((ComboBox)sender).SelectedItem != null) {
+                var item = (ComboBoxItem)((ComboBox)sender).SelectedItem;
 
-            switch ((string)selectedItem.Tag)
-            {
-                case "Moore":
-                    SelectedNeighborhood = MooreNeighborhood;
-                    break;
-                case "Neumann":
-                    SelectedNeighborhood = NeumannNeigborhood;
-                    break;
-                default:
-                    MessageBox.Show("There is no such neighborhood", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    return;
+                switch (item.Tag)
+                {
+                    case "Moore":
+                        SelectedNeighborhood = MooreNeighborhood;
+                        break;
+                    case "Neumann":
+                        SelectedNeighborhood = NeumannNeigborhood;
+                        break;
+                    default:
+                        MessageBox.Show("There is no such neighborhood", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        return;
+                }
             }
-
-            DrawNeighborhood();
         }
 
         void DrawNeighborhood()

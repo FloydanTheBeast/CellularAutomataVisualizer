@@ -7,18 +7,18 @@ namespace CellularAutomata
     {
         public int _cellSize { get; }
 
-        public bool _isInfinite { get; }
+        public bool _isInfinite { get; set; }
 
-        public RuleSet _ruleSet { get; }
+        public int[][] _neighborhood { get; set; }
 
-        public int[][] _neighborhood { get; }
+        public RuleSet _ruleSet { get; set; }
 
-        public Automata(int cellSize, bool isInfinite, RuleSet ruleSet, int[][] neighborhood)
+        public Automata(int cellSize, bool isInfinite, int[][] neighborhood, RuleSet ruleSet)
         {
             _cellSize = cellSize;
             _isInfinite = isInfinite;
-            _ruleSet = ruleSet;
             _neighborhood = neighborhood;
+            _ruleSet = ruleSet;
         }
     }
 }

@@ -12,14 +12,12 @@
         <ScrollViewer HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="1200">
             <StackPanel>
                 <StackPanel Height="100" VerticalAlignment="Top" Orientation="Horizontal">
-                    <RadioButton IsChecked="{Binding Path=IsInfinite, Mode=OneWayToSource}" Content="Finite" Margin="50,0,0,0" VerticalAlignment="Center"
-                                 FontSize="20" VerticalContentAlignment="Center" GroupName="FieldType"/>
-                    <RadioButton IsChecked="True" Content="Infinite" Margin="50,0,0,0" VerticalAlignment="Center"
-                                 FontSize="20" VerticalContentAlignment="Center" GroupName="FieldType"/>
+                    <CheckBox IsChecked="{Binding Path=IsInfinite, Mode=TwoWay}" Content="Is infinite" Margin="50,0,0,0" VerticalAlignment="Center"
+                                 FontSize="20" VerticalContentAlignment="Center" Padding="10" />
                 </StackPanel>
                 <StackPanel Orientation="Horizontal">
                     <Label FontSize="20" Margin="50,0,50,0">Field size:</Label>
-                    <ComboBox SelectedIndex="{Binding Path=Size, Mode=TwoWay}" Width="100">
+                    <ComboBox SelectedIndex="{Binding Path=Size, Mode=OneWayToSource}" Width="100" VerticalContentAlignment="Center">
                         <ComboBoxItem>Small</ComboBoxItem>
                         <ComboBoxItem>Madium</ComboBoxItem>
                         <ComboBoxItem>Large</ComboBoxItem>
@@ -33,6 +31,9 @@
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
-        <Button Click="ConstructAutomata" HorizontalAlignment="Right" Width="80" Background="LightGreen">Construct</Button>
+        <StackPanel>
+            <Button Click="LoadAutomata" HorizontalAlignment="Right" Width="80" Background="LightGray" Height="200">Construct</Button>
+            <Button Click="ConstructAutomata" HorizontalAlignment="Right" Width="80" Background="LightGreen" Height="200">Construct</Button>
+        </StackPanel>
     </Grid>
 </Page>

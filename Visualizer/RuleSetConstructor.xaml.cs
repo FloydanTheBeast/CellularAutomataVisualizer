@@ -22,6 +22,17 @@ namespace Visualizer
             RuleSet.CollectionChanged += RuleSetCollectionChanged;
         }
 
+        public void UpdateViews()
+        {
+            foreach (var item in RuleListView.Items)
+            {
+                if (item is ExactRuleConstructor)
+                    ((ExactRuleConstructor)item).CreateView();
+                else if (item is NearbyNeighborsRuleConstructor)
+                    ((NearbyNeighborsRuleConstructor)item).UpdateView();
+            }
+        }
+
         private void CreateRuleBtnClick(object sender, RoutedEventArgs e)
         {
             ComboBoxItem selectedItem = (ComboBoxItem)RuleTypePicker.SelectedItem;
@@ -38,7 +49,8 @@ namespace Visualizer
                             new Cell(true),
                             "isAlive",
                             true,
-                            x => x >= 0 && x <= 8
+                            0,
+                            9
                         ));
                         break;
                     default:

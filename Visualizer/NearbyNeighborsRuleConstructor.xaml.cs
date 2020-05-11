@@ -26,6 +26,8 @@ namespace Visualizer
     {
         public static readonly DependencyProperty CurrentRuleProperty;
 
+        BindingExpressionBase CurrentRuleBinding;
+
         public NearbyNeighborsRule CurrentRule
         {
             get => (NearbyNeighborsRule)GetValue(CurrentRuleProperty);
@@ -35,10 +37,18 @@ namespace Visualizer
             }
         }
 
-        public string LowerBound { get; set; }
+        string _lowerBound = "-1";
+        public string LowerBound {
+            get => _lowerBound;
+            set => _lowerBound = String.IsNullOrEmpty(value) ? "-1" : value;
+        }
 
-        public string UpperBound { get; set; }
-
+        string _upperBound = "-1";
+        public string UpperBound
+        {
+            get => _upperBound;
+            set => _upperBound = String.IsNullOrEmpty(value) ? "-1" : value;
+        }
 
         public NearbyNeighborsRuleConstructor(int collectionIndex)
         {
@@ -49,17 +59,20 @@ namespace Visualizer
             ruleCollectionBinding.Path = new PropertyPath($"RuleSet[{collectionIndex}]");
             ruleCollectionBinding.Mode = BindingMode.TwoWay;
 
-            SetBinding(CurrentRuleProperty, ruleCollectionBinding);
+            CurrentRuleBinding = SetBinding(CurrentRuleProperty, ruleCollectionBinding);
+
+            /*OnPropertyChanged("CurrentRule");*/
 
             StartingStateCanvas.Children.Add(GenerateRect(
-                    (int)StartingStateCanvas.Width, false
+                    (int)StartingStateCanvas.Width, (bool)CurrentRule.CenterCellState["isAlive"]
             ));
 
             EndingStateCanvas.Children.Add(GenerateRect(
-                    (int)StartingStateCanvas.Width, true
+                    (int)StartingStateCanvas.Width, (bool)CurrentRule.NextState["isAlive"]
             ));
-        }
 
+            /*UpdateView();*/
+        }
 
         static NearbyNeighborsRuleConstructor()
         {
@@ -69,13 +82,40 @@ namespace Visualizer
                 typeof(NearbyNeighborsRuleConstructor),
                 new PropertyMetadata(
                     new NearbyNeighborsRule(
-                        new Cell(),
+                        new Cell(true),
                         "isAlive",
                         true,
-                        x => x >= 0 && x <= 8,
-                        new Cell(true)
+                        0,
+                        9,
+                        new Cell()
                 ))
             );
+        }
+
+
+        public void UpdateView()
+        {
+            CurrentRuleBinding.UpdateTarget();
+
+            Rectangle startingStateRect = (Rectangle)StartingStateCanvas.Children[0];
+
+            startingStateRect.Tag = (bool)CurrentRule.CenterCellState["isAlive"];
+            startingStateRect.Fill = (bool)CurrentRule.CenterCellState["isAlive"] ?
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2ecc71")) :
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#34495e"));
+
+            Rectangle endingStateRect = (Rectangle)EndingStateCanvas.Children[0];
+
+            endingStateRect.Tag = (bool)CurrentRule.NextState["isAlive"];
+            endingStateRect.Fill = (bool)CurrentRule.NextState["isAlive"] ?
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2ecc71")) :
+                new SolidColorBrush((Color)ColorConverter.ConvertFromString("#34495e"));
+
+            LowerBoundInput.Text = CurrentRule.LowerBound.ToString();
+            LowerBound = CurrentRule.LowerBound.ToString();
+
+            UpperBoundInput.Text = CurrentRule.UpperBound.ToString();
+            UpperBound = CurrentRule.UpperBound.ToString();
         }
 
 
@@ -108,12 +148,6 @@ namespace Visualizer
             return cellRect;
         }
 
-
-        Func<int, bool> ConstructPredicate() =>
-            (x) => (String.IsNullOrEmpty(LowerBound) || x >= int.Parse(LowerBound))
-                && (String.IsNullOrEmpty(UpperBound) || x <= int.Parse(UpperBound));
-
-
         private void BoundaryInput(object sender, TextCompositionEventArgs e) =>
             e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
 
@@ -136,7 +170,8 @@ namespace Visualizer
                 new Cell((bool)((Rectangle)EndingStateCanvas.Children[0]).Tag),
                 "isAlive",
                 true,
-                ConstructPredicate(),
+                int.Parse(LowerBound),
+                int.Parse(UpperBound),
                 new Cell((bool)((Rectangle)StartingStateCanvas.Children[0]).Tag)
             );
 

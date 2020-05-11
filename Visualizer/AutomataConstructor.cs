@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
 using System;
+using System.Collections.ObjectModel;
 
 namespace Visualizer
 {
@@ -15,12 +16,6 @@ namespace Visualizer
     /// </summary>
     public partial class AutomataConstructor : Page, INotifyPropertyChanged
     {
-        public AutomataConstructor()
-        {
-            DataContext = this;
-            InitializeComponent();
-        }
-
         public int Size { get; set; }
 
         private bool _isInfinite;
@@ -29,19 +24,24 @@ namespace Visualizer
             get => _isInfinite;
             set
             {
-                if (_isInfinite!= value)
-                {
-                    _isInfinite = value;
-                    OnPropertyChanged();
-                }
+                _isInfinite = value;
+                OnPropertyChanged("IsInfinite");
             }
+        }
+
+        public AutomataConstructor()
+        {
+            DataContext = this;
+            InitializeComponent();
+
+            Size = 1;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-        private void ConstructAutomata(object sender, System.Windows.RoutedEventArgs e)
+        private void ConstructAutomata(object sender, RoutedEventArgs e)
         {
             if (RuleSetConstructor.RuleSet.Count == 0)
             {
@@ -73,51 +73,63 @@ namespace Visualizer
                     break;
             }
 
-            Automata automata = new Automata(cellSize, IsInfinite, ruleSet, neighborhood);
-            Serializer(automata);
+            Automata automata = new Automata(cellSize, IsInfinite, neighborhood, ruleSet);
+            Serialize(automata);
 
             MessageBox.Show("Automata has been constructed successfuly", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
-            /*NavigationService.Navigate(new AutomataVisualizer(cellSize, IsInfinite, ruleSet, neighborhood));*/
+            NavigationService.Navigate(new AutomataVisualizer(cellSize, IsInfinite, ruleSet, neighborhood));
         }
 
-
-        void Serializer(Automata automata)
+        void Deserialize()
         {
             JsonSerializer serializer = new JsonSerializer();
-            /*serializer.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;*/
+            serializer.TypeNameHandling = TypeNameHandling.All;
+
+            using (StreamReader sr = new StreamReader("test.json"))
+            {
+                using (JsonReader reader = new JsonTextReader(sr))
+                {
+                    Automata a = (Automata)serializer.Deserialize(sr, typeof(Automata));
+                    RuleSetConstructor.RuleSet.Clear();
+
+                    IsInfinite = a._isInfinite;
+
+                    foreach (var item in new ObservableCollection<Rule>(new List<Rule>(a._ruleSet.Rules)))
+                        RuleSetConstructor.RuleSet.Add(item);
+
+                    NeighborhoodPicker.SelectedNeighborhood = a._neighborhood;
+
+                    MessageBox.Show("Successful deserialization");
+                }
+            }
+        }
+
+        void Serialize(Automata automata)
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.TypeNameHandling = TypeNameHandling.All;
 
             try
             {
-                /*using (StreamWriter sw = new StreamWriter("test.json"))
-                    using (JsonWriter writer = new JsonTextWriter(sw))
+                using (StreamWriter sw = new StreamWriter("test.json"))
+                using (JsonWriter writer = new JsonTextWriter(sw))
                     {
                         serializer.Serialize(writer, automata);
-                        // {"ExpiryDate":new Date(1230375600000),"Price":0}
                         MessageBox.Show("Success");
                     }
-*/
-                using (StreamWriter sw = new StreamWriter("test2.json"))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    Func<int, int> test = (x) => x;
-                    serializer.Serialize(writer, test);
-                    // {"ExpiryDate":new Date(1230375600000),"Price":0}
-                    MessageBox.Show("Success");
-                }
 
-                using (StreamReader sw = new StreamReader("test2.json"))
-                using (JsonReader reader = new JsonTextReader(sw))
-                {
-                    Func<int, int> test2 = (x) => 0;
-                    test2 = (Func<int, int>)serializer.Deserialize(reader, typeof(Func<int, int>));
-                    // {"ExpiryDate":new Date(1230375600000),"Price":0}
-                    MessageBox.Show(test2(5).ToString());
-                }
+                return;
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void LoadAutomata(object sender, RoutedEventArgs e)
+        {
+            Deserialize();
+            RuleSetConstructor.UpdateViews();
         }
     }
 }

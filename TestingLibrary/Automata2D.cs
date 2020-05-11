@@ -20,8 +20,8 @@ namespace TestingLibrary
 
             ruleGol = new RuleSet(new[]
 {
-                new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3, new Cell()),
-                new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3 || x == 2, new Cell(true))
+                new NearbyNeighborsRule(new Cell(true), "isAlive", true, 3, 3, new Cell()),
+                new NearbyNeighborsRule(new Cell(true), "isAlive", true, 2, 3, new Cell(true))
             }, new Cell(), true);
 
             gameField = new GameField(startingField, new[]
@@ -40,8 +40,9 @@ namespace TestingLibrary
             // B3/S35 ruleset
             ruleGolB3S35 = new RuleSet(new[]
             {
-                new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3, new Cell()),
-                new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3 || x == 5, new Cell(true))
+                new NearbyNeighborsRule(new Cell(true), "isAlive", true, 3, 3, new Cell()),
+                new NearbyNeighborsRule(new Cell(true), "isAlive", true, 3, 3, new Cell(true)),
+                new NearbyNeighborsRule(new Cell(true), "isAlive", true, 5, 5, new Cell(true))
             }, new Cell(), true);
 
             void CreateGlider()
