@@ -5,15 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Visualizer"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="800">
-    <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="800" Orientation="Horizontal">
-            <ComboBox Name="RuleTypePicker" Width="150" VerticalAlignment="Center" Height="24" Margin="20,0,0,0">
-                <ComboBoxItem Tag="ExactPattern">Exact pattern</ComboBoxItem>
-                <ComboBoxItem Tag="NearbyNeighbors">Nearby neighbors</ComboBoxItem>
-            </ComboBox>
-            <Button Content="Add new rule" Width="100" Height="24" Margin="8" Click="CreateRuleBtnClick"/>
-        </StackPanel>
+             d:DesignHeight="100" d:DesignWidth="690">
+    <Grid KeyDown="HandleKeyDown">
+        <Grid HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="670">
+            <StackPanel Orientation="Horizontal">
+                <ComboBox Name="RuleTypePicker" Width="150" VerticalAlignment="Center" Height="30" Margin="20,0,0,0" HorizontalAlignment="Left">
+                    <ComboBoxItem Tag="ExactPattern">Exact pattern</ComboBoxItem>
+                    <ComboBoxItem Tag="NearbyNeighbors">Nearby neighbors</ComboBoxItem>
+                </ComboBox>
+                <Button Content="Add new rule" Width="100" Height="30" Margin="8" Click="CreateRuleBtnClick" HorizontalAlignment="Left"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Clear" Click="ClearRuleSetBtnClick" Height="30" Width="80" HorizontalAlignment="Right" Margin="0,0,8,0"/>
+                <Button Content="Remove" Click="RemoveSelectedRuleBtnClick" Height="30" Width="80" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Grid>
 
         <ListView Name="RuleListView" HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="650" Margin="20,60,0,0">
         </ListView>

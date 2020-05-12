@@ -8,11 +8,14 @@
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
         <ScrollViewer Name="GameFieldScroll" Height="720" VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden">
-            <Canvas MouseWheel="DisableWheelScroll" Name="GameField" Height="608" Width="1280" VerticalAlignment="Top">
-            </Canvas>
+            <Canvas MouseWheel="DisableWheelScroll" Name="GameField" Height="608" Width="1280" VerticalAlignment="Top" MouseMove="DrawField" MouseLeftButtonDown="DrawCell"/>
         </ScrollViewer>
-        <Button Click="UpdateAutomataBtnClick" Content="Update" Margin="464,636,650,0" VerticalAlignment="Top" Height="44"/>
-        <Button Click="StartAutomata" Content="Play" Margin="649,636,465,0" VerticalAlignment="Top" Height="44"/>
-    </Grid>
 
+        <Button Click="GenerateRandomField" Content="Randomize" Margin="201,636,913,0" VerticalAlignment="Top" Height="44"/>
+        <Button Click="UpdateAutomataBtnClick" Content="Update" Margin="397,636,717,0" VerticalAlignment="Top" Height="44"/>
+        <Button Click="StartAutomata" Content="Play" Margin="596,636,518,0" VerticalAlignment="Top" Height="44"/>
+        <Button Click="PauseAutomata" Content="Pause" Margin="783,636,331,0" VerticalAlignment="Top" Height="44"/>
+        <Button Click="ClearField" Content="Clear" Margin="967,636,147,0" VerticalAlignment="Top" Height="44"/>
+        <Label Name="Coords" HorizontalAlignment="Left" Margin="372,636,0,0" FontSize="20" VerticalAlignment="Top"/>
+    </Grid>
 </UserControl>

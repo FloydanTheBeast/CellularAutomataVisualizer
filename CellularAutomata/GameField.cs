@@ -51,6 +51,13 @@ namespace CellularAutomata
             CurrentGeneration++;
         }
 
+        public void GenerateDefault(int width, int height) =>
+            Cells = CellListGenerator.Generate(width, height);
+
+        public void GenerateRandomField(int width, int height) =>
+            Cells = CellListGenerator.GenerateRandom(width, height);
+
+
         Cell[] GetNeighborhood(int xCoordinate, int yCoordinate = 0)
         {
             Cell[] neighborhood = new Cell[_neighborhoodCoords.Length];

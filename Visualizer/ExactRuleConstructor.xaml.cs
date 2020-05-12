@@ -55,6 +55,7 @@ namespace Visualizer
             Binding neighborhoodBinding = new Binding();
             neighborhoodBinding.Path = new PropertyPath("Tag");
             neighborhoodBinding.Mode = BindingMode.TwoWay;
+            neighborhoodBinding.TargetNullValue = new int[0][];
             CellNeighborhoodBinding = SetBinding(CellNeighborhoodProperty, neighborhoodBinding);
 
             Binding ruleCollectionBinding = new Binding();

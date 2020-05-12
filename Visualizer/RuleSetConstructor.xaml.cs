@@ -39,6 +39,7 @@ namespace Visualizer
             }
         }
 
+
         private void CreateRuleBtnClick(object sender, RoutedEventArgs e)
         {
             ComboBoxItem selectedItem = (ComboBoxItem)RuleTypePicker.SelectedItem;
@@ -70,6 +71,7 @@ namespace Visualizer
             }
         }
 
+
         private void RuleSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             switch (e.Action)
@@ -86,20 +88,48 @@ namespace Visualizer
                         RuleListView.Items.Add(ruleConstructor);
                     }
                     break;
-/*                case NotifyCollectionChangedAction.Remove: // если удаление
-                    User oldUser = e.OldItems[0] as User;
-                    Console.WriteLine($"Удален объект: {oldUser.Name}");
-                    break;
-                case NotifyCollectionChangedAction.Replace: // если замена
-                    User replacedUser = e.OldItems[0] as User;
-                    User replacingUser = e.NewItems[0] as User;
-                    Console.WriteLine($"Объект {replacedUser.Name} заменен объектом {replacingUser.Name}");
-                    break;*/
             }
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
+        private void RemoveSelectedRule()
+        {
+            ComboBoxItem selectedItem = (ComboBoxItem)RuleTypePicker.SelectedItem;
+            int selectedIndex = RuleListView.SelectedIndex;
+
+
+            if (selectedIndex != -1)
+            {
+                RuleListView.Items[selectedIndex] = null;
+                RuleListView.Items.RemoveAt(selectedIndex);
+                RuleSet.RemoveAt(selectedIndex);
+            }
+        }
+
+
+        public void ClearRuleSet()
+        {
+            RuleListView.Items.Clear();
+            RuleSet.Clear();
+        }
+
+
+        private void HandleKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == System.Windows.Input.Key.Delete)
+                RemoveSelectedRule();
+        }
+
+
+        private void RemoveSelectedRuleBtnClick(object sender, RoutedEventArgs e)
+            => RemoveSelectedRule();
+
+
+        private void ClearRuleSetBtnClick(object sender, RoutedEventArgs e)
+            => ClearRuleSet();
     }
 }

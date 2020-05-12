@@ -56,8 +56,6 @@ namespace Visualizer
                     {
                         Automata automata = (Automata)serializer.Deserialize(sr, typeof(Automata));
 
-                        RuleSetConstructor.RuleSet.Clear();
-
                         IsInfinite = automata._isInfinite;
                         NeighborhoodPicker.SelectedNeighborhood = automata._neighborhood;
 
@@ -127,6 +125,7 @@ namespace Visualizer
 
         async private void LoadAutomata(object sender, RoutedEventArgs e)
         {
+            RuleSetConstructor.ClearRuleSet();
             Deserialize();
             await Task.Delay(1);
             RuleSetConstructor.UpdateViews();

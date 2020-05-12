@@ -66,7 +66,7 @@ namespace Visualizer
                 *//*new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3 || x == 2, new Cell(true))*//*
             }, new Cell(), true);*/
 
-            Cell[][] startingField = CellListGenerator.GenerateRandom(width, height);
+            Cell[][] startingField = CellListGenerator.Generate(width, height);
             /*startingField[5][5] = new Cell(true);*/
             /*startingField[5][6] = new Cell(true);*/
 
@@ -179,9 +179,50 @@ namespace Visualizer
             }
         }
 
-        private void StartAutomata(object sender, RoutedEventArgs e)
+        private void StartAutomata(object sender, RoutedEventArgs e) => timer.Start();
+
+        private void PauseAutomata(object sender, RoutedEventArgs e) => timer.Stop();
+
+        private void GenerateRandomField(object sender, RoutedEventArgs e)
         {
-            timer.Start();
+            gameField.GenerateRandomField(width, height);
+            UpdateAutomataView();
+        }
+
+        private void DrawField(object sender, MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                Point currentPoint = e.GetPosition((Canvas)sender);
+
+                int y = (int)(currentPoint.Y / cellSize);
+                int x = (int)(currentPoint.X / cellSize);
+
+                Coords.Content = $"X: {x}, Y: {y}";
+
+                gameField.Cells[y][x] = new Cell(!(bool)gameField.Cells[y][x]["isAlive"]);
+                ToggleRectangle(x, y);
+            }
+        }
+
+        private void DrawCell(object sender, MouseButtonEventArgs e)
+        {
+            Point currentPoint = e.GetPosition((Canvas)sender);
+
+            int y = (int)(currentPoint.Y / cellSize);
+            int x = (int)(currentPoint.X / cellSize);
+
+            Coords.Content = $"X: {x}, Y: {y}";
+
+            gameField.Cells[y][x] = new Cell(!(bool)gameField.Cells[y][x]["isAlive"]);
+            ToggleRectangle(x, y);
+        }
+
+        private void ClearField(object sender, RoutedEventArgs e)
+        {
+            timer.Stop();
+            gameField.GenerateDefault(width, height);
+            UpdateAutomataView();
         }
     }
 }
