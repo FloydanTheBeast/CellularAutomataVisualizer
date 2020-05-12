@@ -9,6 +9,6 @@
     <Grid>
         <Frame x:FieldModifier="public" Name="MainFrame" Height="720" VerticalAlignment="Top" Width="1280" HorizontalAlignment="Right" NavigationUIVisibility="Hidden"/>
         <Button Content="Constructor" HorizontalAlignment="Left" Margin="36,36,0,0" VerticalAlignment="Top" Width="75" Click="NavigateToConstructor"/>
-        <Button Content="Visualizer" HorizontalAlignment="Left" Margin="36,76,0,0" VerticalAlignment="Top" Width="75" Click="NavigateToVisualizer"/>
+        <Button Content="Gallery" HorizontalAlignment="Left" Margin="36,76,0,0" VerticalAlignment="Top" Width="75" Click="NavigateToGallery"/>
     </Grid>
 </Window>

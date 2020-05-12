@@ -47,7 +47,7 @@ namespace TestingLibrary
 
             void CreateGlider()
             {
-                // Glided for game of life B3/S25
+                // Glided for game of life B3/S35
                 startingField[2][1] = new Cell(true);
                 startingField[3][2] = new Cell(true);
                 startingField[3][3] = new Cell(true);

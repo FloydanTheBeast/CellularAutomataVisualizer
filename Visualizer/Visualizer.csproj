@@ -58,8 +58,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AutomataCard.xaml.cs">
+      <DependentUpon>AutomataCard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ExactRuleConstructor.xaml.cs">
       <DependentUpon>ExactRuleConstructor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Gallery.xaml.cs">
+      <DependentUpon>Gallery.xaml</DependentUpon>
     </Compile>
     <Compile Include="NearbyNeighborsRuleConstructor.xaml.cs">
       <DependentUpon>NearbyNeighborsRuleConstructor.xaml</DependentUpon>
@@ -67,11 +73,19 @@
     <Compile Include="RuleSetConstructor.xaml.cs">
       <DependentUpon>RuleSetConstructor.xaml</DependentUpon>
     </Compile>
+    <Page Include="AutomataCard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AutomataConstructor.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ExactRuleConstructor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Gallery.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -140,6 +154,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AutomatasGallerty\AutomatasGallery.csproj">
+      <Project>{1b7abc24-5334-4f88-b4dc-77f819379d87}</Project>
+      <Name>AutomatasGallery</Name>
+    </ProjectReference>
     <ProjectReference Include="..\CellularAutomata\CellularAutomata.csproj">
       <Project>{94f8190b-ee06-46b2-b35f-b0856b0fee0c}</Project>
       <Name>CellularAutomata</Name>

@@ -31,18 +31,17 @@ namespace Visualizer
 
         readonly bool isOneDimensional;
 
-        readonly GameField gameField;
+        GameField gameField;
 
-        readonly RuleSet ruleSet;
-
-        // Delay before next update
-        double delay = 0.0125;
+        RuleSet ruleSet;
 
         DispatcherTimer timer = new DispatcherTimer();
 
         public AutomataVisualizer(Automata automata)
         {
             InitializeComponent();
+
+            isOneDimensional = automata._neighborhood[0].Length == 1;
 
             ruleSet = automata._ruleSet;
             cellSize = automata._cellSize;
@@ -51,32 +50,11 @@ namespace Visualizer
             width = (int)GameField.Width / cellSize;
             height = (int)GameField.Height / cellSize;
 
-            timer.Tick += (object sender, EventArgs e) => UpdateAutomata();
-            timer.Interval = new TimeSpan((int)(delay * TimeSpan.TicksPerSecond));
+            timer.Tick += (object sender, EventArgs e) 
+                => UpdateAutomata();
+            timer.Interval = new TimeSpan((int)(DelaySlider.Value * TimeSpan.TicksPerSecond));
 
-            /*ruleSet = new RuleSet(new Rule[] {
-                new XorRule(30)
-            }, new Cell(), true);*/
-
-            /*ruleSet = Automata2D.ruleGolB3S35;*/
-
-            /*this.ruleSet = new RuleSet(new[]
-            {
-                new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 1, new Cell()),
-                *//*new NearbyNeighborsRule(new Cell(true), "isAlive", true, x => x == 3 || x == 2, new Cell(true))*//*
-            }, new Cell(), true);*/
-
-            Cell[][] startingField = CellListGenerator.Generate(width, height);
-            /*startingField[5][5] = new Cell(true);*/
-            /*startingField[5][6] = new Cell(true);*/
-
-            /*gameField = new GameField(startingField, new[] { new[] { -1 }, new[] { 0 }, new[] { 1 } }, true);*/
-
-            /*startingField[2][1] = new Cell(true);
-            startingField[3][2] = new Cell(true);
-            startingField[3][3] = new Cell(true);
-            startingField[2][3] = new Cell(true);
-            startingField[1][3] = new Cell(true);*/
+            Cell[][] startingField = CellListGenerator.Generate(width, isOneDimensional ? 1 : height);
 
             gameField = new GameField(
                 startingField,
@@ -84,14 +62,20 @@ namespace Visualizer
                 automata._isInfinite
             );
 
-            isOneDimensional = gameField.Cells.Length == 1;
+            CurrentGenerationLabel.Content = $"{gameField.CurrentGeneration}";
+
+            if (isOneDimensional)
+                ClearFieldButton.IsEnabled = false;
 
             DrawAutomata();
         }
 
-        // Guess what, dumbass
+
         private void DisableWheelScroll(object sender, MouseWheelEventArgs e)
-            => e.Handled = true;
+        {
+            GameFieldScroll.ScrollToVerticalOffset(-e.Delta);
+            e.Handled = true;
+        }
 
         public void DrawAutomata()
         {
@@ -153,12 +137,12 @@ namespace Visualizer
         }
 
         private void UpdateAutomataBtnClick(object sender, RoutedEventArgs e)
-        {
-            UpdateAutomata();
-        }
+            => UpdateAutomata();
 
         void UpdateAutomata()
         {
+            CurrentGenerationLabel.Content = $"{gameField.CurrentGeneration}";
+
             gameField.ChangeField(ruleSet);
 
             switch (isOneDimensional)
@@ -173,7 +157,6 @@ namespace Visualizer
                     DrawAutomata();
                     break;
                 case false: // 2D automata
-                    /*GameField.Children.Clear();*/
                     UpdateAutomataView();
                     break;
             }
@@ -185,23 +168,24 @@ namespace Visualizer
 
         private void GenerateRandomField(object sender, RoutedEventArgs e)
         {
-            gameField.GenerateRandomField(width, height);
+            gameField.GenerateRandomField(width, isOneDimensional ? 1 : height);
             UpdateAutomataView();
         }
 
         private void DrawField(object sender, MouseEventArgs e)
         {
-            if (e.LeftButton == MouseButtonState.Pressed)
+            if (!isOneDimensional)
             {
-                Point currentPoint = e.GetPosition((Canvas)sender);
+                if (e.LeftButton == MouseButtonState.Pressed)
+                {
+                    Point currentPoint = e.GetPosition((Canvas)sender);
 
-                int y = (int)(currentPoint.Y / cellSize);
-                int x = (int)(currentPoint.X / cellSize);
+                    int y = (int)(currentPoint.Y / cellSize);
+                    int x = (int)(currentPoint.X / cellSize);
 
-                Coords.Content = $"X: {x}, Y: {y}";
-
-                gameField.Cells[y][x] = new Cell(!(bool)gameField.Cells[y][x]["isAlive"]);
-                ToggleRectangle(x, y);
+                    gameField.Cells[y][x] = new Cell(!(bool)gameField.Cells[y][x]["isAlive"]);
+                    ToggleRectangle(x, y);
+                }
             }
         }
 
@@ -209,10 +193,8 @@ namespace Visualizer
         {
             Point currentPoint = e.GetPosition((Canvas)sender);
 
-            int y = (int)(currentPoint.Y / cellSize);
+            int y = isOneDimensional ? 0 : (int)(currentPoint.Y / cellSize);
             int x = (int)(currentPoint.X / cellSize);
-
-            Coords.Content = $"X: {x}, Y: {y}";
 
             gameField.Cells[y][x] = new Cell(!(bool)gameField.Cells[y][x]["isAlive"]);
             ToggleRectangle(x, y);
@@ -221,8 +203,34 @@ namespace Visualizer
         private void ClearField(object sender, RoutedEventArgs e)
         {
             timer.Stop();
-            gameField.GenerateDefault(width, height);
-            UpdateAutomataView();
+
+            gameField.CurrentGeneration = 0;
+            CurrentGenerationLabel.Content = $"{gameField.CurrentGeneration}";
+
+            gameField.GenerateDefault(width, isOneDimensional ? 1 : height);
+            GameField.Children.Clear();
+            DrawAutomata();
+            /*UpdateAutomataView();*/
         }
+
+        private void GoBackBtnClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService navigation = NavigationService.GetNavigationService(this);
+
+            if (navigation.CanGoBack)
+            {
+                timer.Stop();
+
+                // Remove redundant references for optimization
+                GameField.Children.Clear();
+                ruleSet = null;
+                gameField = null;
+
+                navigation.GoBack();
+            }
+        }
+
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) =>
+            timer.Interval = new TimeSpan((int)(e.NewValue * TimeSpan.TicksPerSecond));
     }
 }

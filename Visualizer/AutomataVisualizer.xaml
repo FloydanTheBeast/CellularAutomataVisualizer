@@ -7,15 +7,26 @@
              mc:Ignorable="d" 
              d:DesignHeight="720" d:DesignWidth="1280">
     <Grid>
-        <ScrollViewer Name="GameFieldScroll" Height="720" VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden">
-            <Canvas MouseWheel="DisableWheelScroll" Name="GameField" Height="608" Width="1280" VerticalAlignment="Top" MouseMove="DrawField" MouseLeftButtonDown="DrawCell"/>
-        </ScrollViewer>
+        <StackPanel Height="720" Width="1200" HorizontalAlignment="Left">
+            <ScrollViewer Name="GameFieldScroll" Height="720" VerticalAlignment="Top" VerticalScrollBarVisibility="Hidden" Width="1200">
+                <Canvas MouseWheel="DisableWheelScroll" Name="GameField" Height="720"
+                        Width="1200" VerticalAlignment="Top" MouseMove="DrawField" MouseLeftButtonDown="DrawCell"/>
+            </ScrollViewer>
+        </StackPanel>
 
-        <Button Click="GenerateRandomField" Content="Randomize" Margin="201,636,913,0" VerticalAlignment="Top" Height="44"/>
-        <Button Click="UpdateAutomataBtnClick" Content="Update" Margin="397,636,717,0" VerticalAlignment="Top" Height="44"/>
-        <Button Click="StartAutomata" Content="Play" Margin="596,636,518,0" VerticalAlignment="Top" Height="44"/>
-        <Button Click="PauseAutomata" Content="Pause" Margin="783,636,331,0" VerticalAlignment="Top" Height="44"/>
-        <Button Click="ClearField" Content="Clear" Margin="967,636,147,0" VerticalAlignment="Top" Height="44"/>
-        <Label Name="Coords" HorizontalAlignment="Left" Margin="372,636,0,0" FontSize="20" VerticalAlignment="Top"/>
+        <StackPanel Width="80" HorizontalAlignment="Right">
+            <Button Width="80" Height="80" Content="Go back" Click="GoBackBtnClick"></Button>
+            <Button Click="GenerateRandomField" Content="Randomize" VerticalAlignment="Top" Height="80"/>
+            <Button Click="UpdateAutomataBtnClick" Content="Update" VerticalAlignment="Top" Height="80"/>
+            <Button Click="StartAutomata" Content="Play" VerticalAlignment="Top" Height="80"/>
+            <Button Click="PauseAutomata" Content="Pause" VerticalAlignment="Top" Height="80"/>
+            <Button Name="ClearFieldButton" Click="ClearField" Content="Clear" VerticalAlignment="Top" Height="80"/>
+            <Label FontSize="12" Margin="0,10,0,0">Delay</Label>
+            <Slider x:Name="DelaySlider" Minimum="0.025" Maximum="0.5"
+                    ValueChanged="Slider_ValueChanged" Margin="0,8,0,10"/>
+            <Label HorizontalAlignment="Left" FontSize="12" VerticalAlignment="Top" Content="Generation №"
+                   Padding="0, 10" Width="80" HorizontalContentAlignment="Center"/>
+            <Label Name="CurrentGenerationLabel" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Top"/>
+        </StackPanel>
     </Grid>
 </UserControl>

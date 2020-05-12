@@ -4,7 +4,6 @@ using System.IO;
 
 namespace CellularAutomata
 {
-    [Serializable]
     public class Automata
     {
         public int _cellSize { get; }
@@ -23,6 +22,8 @@ namespace CellularAutomata
             {
                 if (string.IsNullOrEmpty(value))
                     _name = $"Cellular automata ${GetHashCode().ToString().Substring(0, 5)}";
+                else
+                    _name = value;
             }
         } 
 

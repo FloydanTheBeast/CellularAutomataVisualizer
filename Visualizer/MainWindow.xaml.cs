@@ -41,5 +41,10 @@ namespace Visualizer
         {
             
         }
+
+        private void NavigateToGallery(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Navigate(new Gallery());
+        }
     }
 }

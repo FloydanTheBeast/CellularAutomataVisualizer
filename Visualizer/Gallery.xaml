@@ -1,0 +1,23 @@
+﻿<Page x:Class="Visualizer.Gallery"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Visualizer"
+      mc:Ignorable="d" 
+      d:DesignHeight="620" d:DesignWidth="1280"
+      Title="Gallerty">
+
+    <ScrollViewer>
+        <StackPanel>
+            <StackPanel>
+                <Label FontWeight="SemiBold" FontSize="24" Margin="16" Width="Auto">2D automatas</Label>
+                <StackPanel Width="1280" Height="Auto" x:Name="Gallery2D" Orientation="Vertical" />
+            </StackPanel>
+            <StackPanel Margin="0,0,0,20">
+                <Label FontWeight="SemiBold" FontSize="24" Margin="16" Width="Auto">1D automatas</Label>
+                <StackPanel Width="1280" Height="Auto" x:Name="Gallery1D" Orientation="Vertical" />
+            </StackPanel>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
