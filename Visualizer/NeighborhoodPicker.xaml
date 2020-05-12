@@ -7,7 +7,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200">
     <Grid>
-        <ComboBox SelectionChanged="TypeSelectHandler" Name="TypePicker" VerticalAlignment="Top" Width="180" HorizontalAlignment="Center" Height="24">
+        <ComboBox SelectionChanged="TypeSelectHandler" Name="TypePicker" VerticalAlignment="Top" Width="180" HorizontalAlignment="Center"
+                  FontSize="14" FontWeight="Light" BorderThickness="0" Height="30" VerticalContentAlignment="Center">
             <ComboBoxItem Tag="Moore">Moore neighborhood</ComboBoxItem>
             <ComboBoxItem Tag="Neumann">Fon Neumann neighborhood</ComboBoxItem>
         </ComboBox>

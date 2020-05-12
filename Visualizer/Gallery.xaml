@@ -11,11 +11,11 @@
     <ScrollViewer>
         <StackPanel>
             <StackPanel>
-                <Label FontWeight="SemiBold" FontSize="24" Margin="16" Width="Auto">2D automatas</Label>
+                <Label FontWeight="SemiBold" FontSize="30" Margin="24" Width="Auto" Foreground="#fff">2D automatas</Label>
                 <StackPanel Width="1280" Height="Auto" x:Name="Gallery2D" Orientation="Vertical" />
             </StackPanel>
             <StackPanel Margin="0,0,0,20">
-                <Label FontWeight="SemiBold" FontSize="24" Margin="16" Width="Auto">1D automatas</Label>
+                <Label FontWeight="SemiBold" FontSize="30" Margin="24" Width="Auto" Foreground="#fff">1D automatas</Label>
                 <StackPanel Width="1280" Height="Auto" x:Name="Gallery1D" Orientation="Vertical" />
             </StackPanel>
         </StackPanel>

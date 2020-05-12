@@ -33,14 +33,7 @@ namespace Visualizer
         }
 
         private void NavigateToConstructor(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void NavigateToVisualizer(object sender, RoutedEventArgs e)
-        {
-            
-        }
+            => MainFrame.Navigate(automataConstructor);
 
         private void NavigateToGallery(object sender, RoutedEventArgs e)
         {

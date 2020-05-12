@@ -9,19 +9,41 @@
     <Grid KeyDown="HandleKeyDown">
         <Grid HorizontalAlignment="Left" Height="60" VerticalAlignment="Top" Width="670">
             <StackPanel Orientation="Horizontal">
-                <ComboBox Name="RuleTypePicker" Width="150" VerticalAlignment="Center" Height="30" Margin="20,0,0,0" HorizontalAlignment="Left">
+                <ComboBox Name="RuleTypePicker" Width="150" VerticalAlignment="Center" Height="30" Margin="20,0,0,0" HorizontalAlignment="Left"
+                          FontSize="14" FontWeight="Light" BorderThickness="0" VerticalContentAlignment="Center">
                     <ComboBoxItem Tag="ExactPattern">Exact pattern</ComboBoxItem>
                     <ComboBoxItem Tag="NearbyNeighbors">Nearby neighbors</ComboBoxItem>
                 </ComboBox>
-                <Button Content="Add new rule" Width="100" Height="30" Margin="8" Click="CreateRuleBtnClick" HorizontalAlignment="Left"/>
+                <Button Content="Add new rule" Width="100" Height="30" Margin="8" Click="CreateRuleBtnClick" HorizontalAlignment="Left"
+                        Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light" BorderThickness="0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="6"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Clear" Click="ClearRuleSetBtnClick" Height="30" Width="80" HorizontalAlignment="Right" Margin="0,0,8,0"/>
-                <Button Content="Remove" Click="RemoveSelectedRuleBtnClick" Height="30" Width="80" HorizontalAlignment="Right"/>
+                <Button Content="Clear" Click="ClearRuleSetBtnClick" Height="30" Width="80" HorizontalAlignment="Right" Margin="0,0,8,0"
+                        Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light" BorderThickness="0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="6"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="Remove" Click="RemoveSelectedRuleBtnClick" Height="30" Width="80" HorizontalAlignment="Right"
+                        Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light" BorderThickness="0">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="6"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </StackPanel>
         </Grid>
 
-        <ListView Name="RuleListView" HorizontalAlignment="Left" Height="auto" VerticalAlignment="Top" Width="650" Margin="20,60,0,0">
-        </ListView>
+        <ListView Background="Transparent" Name="RuleListView" HorizontalAlignment="Left" Height="auto"
+                  VerticalAlignment="Top" Width="650" Margin="20,60,0,0" BorderThickness="0"/>
     </Grid>
 </UserControl>

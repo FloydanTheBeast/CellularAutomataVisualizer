@@ -55,6 +55,22 @@ namespace AutomatasGallery
                 ),
                 "Game of Life B3/S35"
             ));
+
+            automatas.Add(new Automata(
+                Constants.CellSize,
+                true,
+                Constants.NeumannNeigborhood,
+                new RuleSet(
+                    new Rule[] {
+                        new NearbyNeighborsRule(new Cell(true), "isAlive", true, 2, 2, new Cell(true)),
+                        new NearbyNeighborsRule(new Cell(true), "isAlive", true, 4, 4, new Cell(true)),
+                        new NearbyNeighborsRule(new Cell(true), "isAlive", true, 1, 1, new Cell()),
+                        new NearbyNeighborsRule(new Cell(true), "isAlive", true, 3, 3, new Cell())
+                    },
+                    new Cell(), true
+                ),
+                "Neumann XOR"
+            ));
         }
     }
 }

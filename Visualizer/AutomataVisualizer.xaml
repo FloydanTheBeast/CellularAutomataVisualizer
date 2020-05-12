@@ -14,19 +14,25 @@
             </ScrollViewer>
         </StackPanel>
 
-        <StackPanel Width="80" HorizontalAlignment="Right">
-            <Button Width="80" Height="80" Content="Go back" Click="GoBackBtnClick"></Button>
-            <Button Click="GenerateRandomField" Content="Randomize" VerticalAlignment="Top" Height="80"/>
-            <Button Click="UpdateAutomataBtnClick" Content="Update" VerticalAlignment="Top" Height="80"/>
-            <Button Click="StartAutomata" Content="Play" VerticalAlignment="Top" Height="80"/>
-            <Button Click="PauseAutomata" Content="Pause" VerticalAlignment="Top" Height="80"/>
-            <Button Name="ClearFieldButton" Click="ClearField" Content="Clear" VerticalAlignment="Top" Height="80"/>
-            <Label FontSize="12" Margin="0,10,0,0">Delay</Label>
+        <StackPanel Width="80" HorizontalAlignment="Right" Background="#34495e">
+            <Button Width="80" Height="80" Content="Go back" Click="GoBackBtnClick" 
+                    BorderThickness="1" BorderBrush="#222" Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light"/>
+            <Button Click="GenerateRandomField" Content="Randomize" VerticalAlignment="Top" Height="80"
+                    BorderThickness="1" BorderBrush="#222" Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light"/>
+            <Button Click="UpdateAutomataBtnClick" Content="Update" VerticalAlignment="Top" Height="80"
+                    BorderThickness="1" BorderBrush="#222" Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light"/>
+            <Button Click="StartAutomata" Content="Play" VerticalAlignment="Top" Height="80"
+                    BorderThickness="1" BorderBrush="#222" Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light"/>
+            <Button Click="PauseAutomata" Content="Pause" VerticalAlignment="Top" Height="80"
+                    BorderThickness="1" BorderBrush="#222" Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light"/>
+            <Button Name="ClearFieldButton" Click="ClearField" Content="Clear" VerticalAlignment="Top" Height="80"
+                    BorderThickness="1" BorderBrush="#222" Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light"/>
+            <Label FontSize="12" Margin="0,10,0,0" FontWeight="Light" Foreground="#fff">Delay</Label>
             <Slider x:Name="DelaySlider" Minimum="0.025" Maximum="0.5"
                     ValueChanged="Slider_ValueChanged" Margin="0,8,0,10"/>
-            <Label HorizontalAlignment="Left" FontSize="12" VerticalAlignment="Top" Content="Generation №"
+            <Label FontWeight="Light" Foreground="#fff" HorizontalAlignment="Left" FontSize="12" VerticalAlignment="Top" Content="Generation №"
                    Padding="0, 10" Width="80" HorizontalContentAlignment="Center"/>
-            <Label Name="CurrentGenerationLabel" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Top"/>
+            <Label Name="CurrentGenerationLabel" HorizontalAlignment="Left" FontSize="16" VerticalAlignment="Top" Foreground="#fff" />
         </StackPanel>
     </Grid>
 </UserControl>

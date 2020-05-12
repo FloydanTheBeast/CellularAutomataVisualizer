@@ -70,7 +70,6 @@ namespace Visualizer
             return new Automata(cellSize, IsInfinite, neighborhood, ruleSet);
         }
 
-
         async private void LoadAutomata(object sender, RoutedEventArgs e)
         {
             RuleSetConstructor.ClearRuleSet();

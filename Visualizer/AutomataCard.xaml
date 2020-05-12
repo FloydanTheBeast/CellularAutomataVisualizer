@@ -6,9 +6,15 @@
              xmlns:local="clr-namespace:Visualizer"
              mc:Ignorable="d" 
              d:DesignHeight="60" d:DesignWidth="120">
-    <Grid Background="#eee" Height="60" Width="120">
-        <Button Background="Transparent" Click="VisualizeAutomata">
-            <TextBlock Name="AutomataNameText" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+    <Grid Height="60" Width="120">
+        <Button Background="#2d3436" Click="VisualizeAutomata" BorderThickness="0"
+                FontWeight="Light" FontSize="12" Foreground="#fff">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="6"/>
+                </Style>
+            </Button.Resources>
+            <TextBlock Name="AutomataNameText" HorizontalAlignment="Center" VerticalAlignment="Center" />
         </Button>
     </Grid>
 </UserControl>
