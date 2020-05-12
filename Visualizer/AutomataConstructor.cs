@@ -4,8 +4,6 @@ using System.Runtime.CompilerServices;
 using CellularAutomata;
 using System.Windows;
 using System.Collections.Generic;
-using System.IO;
-using Newtonsoft.Json;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
@@ -43,36 +41,6 @@ namespace Visualizer
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
 
-        bool Deserialize()
-        {
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.TypeNameHandling = TypeNameHandling.All;
-
-            try
-            {
-                using (StreamReader sr = new StreamReader("test.json"))
-                {
-                    using (JsonReader reader = new JsonTextReader(sr))
-                    {
-                        Automata automata = (Automata)serializer.Deserialize(sr, typeof(Automata));
-
-                        IsInfinite = automata._isInfinite;
-                        NeighborhoodPicker.SelectedNeighborhood = automata._neighborhood;
-
-                        foreach (var item in new ObservableCollection<Rule>(new List<Rule>(automata._ruleSet.Rules)))
-                            RuleSetConstructor.RuleSet.Add(item);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Ошибка при загрузке");
-                return false;
-            }
-
-            return true;
-        }
-
         Automata ConstructAutomata()
         {
             Rule[] ruleArray = new List<Rule>(RuleSetConstructor.RuleSet).ToArray();
@@ -103,32 +71,28 @@ namespace Visualizer
         }
 
 
-        void Serialize(Automata automata)
-        {
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.TypeNameHandling = TypeNameHandling.All;
-
-            try
-            {
-                using (StreamWriter sw = new StreamWriter("test.json"))
-                    using (JsonWriter writer = new JsonTextWriter(sw))                
-                        serializer.Serialize(writer, automata);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-
-            MessageBox.Show("Successfuly saved the automata", "Successfuly", MessageBoxButton.OK, MessageBoxImage.Exclamation);
-        }
-
-
         async private void LoadAutomata(object sender, RoutedEventArgs e)
         {
             RuleSetConstructor.ClearRuleSet();
-            Deserialize();
-            await Task.Delay(1);
-            RuleSetConstructor.UpdateViews();
+            Automata automata;
+
+            try
+            {
+                automata = Automata.Deserialize();
+
+                IsInfinite = automata._isInfinite;
+                NeighborhoodPicker.SelectedNeighborhood = automata._neighborhood;
+
+                foreach (var item in new ObservableCollection<Rule>(new List<Rule>(automata._ruleSet.Rules)))
+                    RuleSetConstructor.RuleSet.Add(item);
+
+                await Task.Delay(1);
+                RuleSetConstructor.UpdateViews();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error while saving automata to a file", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
 
@@ -140,7 +104,11 @@ namespace Visualizer
                 return;
             }
 
-            Serialize(ConstructAutomata());
+
+            if (Automata.Serialize(ConstructAutomata()))
+                MessageBox.Show("Successfuly saved automata to a file", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+            else
+                MessageBox.Show("Error while saving automata to a file", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
