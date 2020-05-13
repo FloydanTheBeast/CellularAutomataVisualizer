@@ -48,6 +48,9 @@ namespace CellularAutomata
 
             try
             {
+                if (!File.Exists(pathToFile))
+                    throw new FileNotFoundException();
+
                 using (StreamReader sr = new StreamReader(pathToFile))
                 {
                     using (JsonReader reader = new JsonTextReader(sr))
@@ -55,6 +58,10 @@ namespace CellularAutomata
                         automata = (Automata)serializer.Deserialize(sr, typeof(Automata));
                     }
                 }
+            }
+            catch (FileNotFoundException)
+            {
+                throw new FileNotFoundException();
             }
             catch (Exception)
             {
@@ -72,8 +79,8 @@ namespace CellularAutomata
             try
             {
                 using (StreamWriter sw = new StreamWriter(pathToFile))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                    serializer.Serialize(writer, automata);
+                    using (JsonWriter writer = new JsonTextWriter(sw))
+                        serializer.Serialize(writer, automata);
             }
             catch (Exception)
             {

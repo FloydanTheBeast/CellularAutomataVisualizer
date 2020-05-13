@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Visualizer
 {
@@ -88,9 +89,14 @@ namespace Visualizer
                 await Task.Delay(1);
                 RuleSetConstructor.UpdateViews();
             }
-            catch (Exception)
+            catch (FileNotFoundException)
             {
-                MessageBox.Show("Error while loading an automata from the file", "Error",
+                MessageBox.Show("There is no file with savings", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error while loading an automata from the file: {ex.Message}", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }

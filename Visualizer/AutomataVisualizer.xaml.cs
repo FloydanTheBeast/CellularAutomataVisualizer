@@ -63,7 +63,6 @@ namespace Visualizer
             DrawAutomata();
         }
 
-
         private void DisableWheelScroll(object sender, MouseWheelEventArgs e) =>
             e.Handled = true;
 
@@ -177,7 +176,6 @@ namespace Visualizer
                 }
             }
         }
-
 
         private void DrawCell(object sender, MouseButtonEventArgs e)
         {

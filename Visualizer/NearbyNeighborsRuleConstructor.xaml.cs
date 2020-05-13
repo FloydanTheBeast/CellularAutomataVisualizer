@@ -45,7 +45,7 @@ namespace Visualizer
 
         public NearbyNeighborsRuleConstructor(int collectionIndex)
         {
-            InitializeComponent();
+            Loaded += (obj, e) => UpdateRule();
 
             Binding ruleCollectionBinding = new Binding();
 
@@ -53,6 +53,8 @@ namespace Visualizer
             ruleCollectionBinding.Mode = BindingMode.TwoWay;
 
             CurrentRuleBinding = SetBinding(CurrentRuleProperty, ruleCollectionBinding);
+
+            InitializeComponent();
 
             StartingStateCanvas.Children.Add(GenerateRect(
                     (int)StartingStateCanvas.Width, (bool)CurrentRule.CenterCellState["isAlive"]
@@ -81,7 +83,6 @@ namespace Visualizer
             );
         }
 
-
         public void UpdateView()
         {
             Rectangle startingStateRect = (Rectangle)StartingStateCanvas.Children[0];
@@ -104,7 +105,6 @@ namespace Visualizer
             UpperBoundInput.Text = CurrentRule.UpperBound.ToString();
             UpperBound = CurrentRule.UpperBound.ToString();
         }
-
 
         Rectangle GenerateRect(int cellSize, bool isAlive)
         {
@@ -138,18 +138,15 @@ namespace Visualizer
         private void BoundaryInput(object sender, TextCompositionEventArgs e) =>
             e.Handled = new Regex("[^0-9]+").IsMatch(e.Text);
 
-
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-
 
         private void BoundaryEditedHandler(object sender, RoutedEventArgs e) {
             LowerBound = LowerBoundInput.Text;
             UpperBound = UpperBoundInput.Text;
             UpdateRule();
         }
-
 
         void UpdateRule()
         {

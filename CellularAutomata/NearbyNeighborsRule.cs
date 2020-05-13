@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace CellularAutomata
+﻿namespace CellularAutomata
 {
     public class NearbyNeighborsRule : Rule
     {

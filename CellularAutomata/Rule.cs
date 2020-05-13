@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using CellularAutomata;
-
-namespace CellularAutomata
+﻿namespace CellularAutomata
 {
     /// <summary>
     /// Class that defines a single rule which determines
