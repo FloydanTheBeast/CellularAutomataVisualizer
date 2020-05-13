@@ -45,8 +45,6 @@ namespace Visualizer
 
         public NearbyNeighborsRuleConstructor(int collectionIndex)
         {
-            Loaded += (obj, e) => UpdateRule();
-
             Binding ruleCollectionBinding = new Binding();
 
             ruleCollectionBinding.Path = new PropertyPath($"RuleSet[{collectionIndex}]");

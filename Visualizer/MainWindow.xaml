@@ -28,7 +28,7 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
-        <Button Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Content="X"
+        <Button Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Content="✖"
                 Foreground="#fff" Background="#2d3436" BorderThickness="0" Click="HandleExit" />
     </Grid>
 </Window>
