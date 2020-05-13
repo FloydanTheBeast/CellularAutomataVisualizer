@@ -11,33 +11,39 @@
     <Grid>
         <ScrollViewer HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="1280">
             <StackPanel>
-                <StackPanel Orientation="Horizontal" Height="80">
-                    <CheckBox IsChecked="{Binding Path=IsInfinite, Mode=TwoWay}" Content="is infinite" Margin="40,0,0,0" VerticalAlignment="Center"
-                                 VerticalContentAlignment="Center" Padding="15,0,0,0" FontSize="20" FontWeight="Light" Foreground="#fff"/>
-                    <Label FontSize="20" FontWeight="Light" Foreground="#fff" Margin="80,0,15,0" VerticalAlignment="Center">Field size:</Label>
-                    <ComboBox SelectedIndex="{Binding Path=Size, Mode=OneWayToSource}" Width="140" VerticalContentAlignment="Center"
-                              FontSize="14" FontWeight="Light" BorderThickness="0" Height="30">
-                        <ComboBoxItem>Small</ComboBoxItem>
-                        <ComboBoxItem>Madium</ComboBoxItem>
-                        <ComboBoxItem>Large</ComboBoxItem>
-                    </ComboBox>
+                <StackPanel>
+                    <Label Foreground="#fff" FontWeight="SemiBold" FontSize="30" Margin="40, 10">Field Parameters</Label>
+                    <StackPanel Orientation="Horizontal" Height="80">
+                        <CheckBox IsChecked="{Binding Path=IsInfinite, Mode=TwoWay}" Content="is infinite" Margin="40,0,0,0" VerticalAlignment="Center"
+                                     VerticalContentAlignment="Center" Padding="15,0,0,0" FontSize="20" FontWeight="Light" Foreground="#fff"
+                                  />
+                        <Label FontSize="20" FontWeight="Light" Foreground="#fff" Margin="80,0,15,0" VerticalAlignment="Center">Field size:</Label>
+                        <ComboBox SelectedIndex="{Binding Path=Size, Mode=OneWayToSource}" Width="140" VerticalContentAlignment="Center"
+                                  FontSize="14" FontWeight="Light" BorderThickness="0" Height="30">
+                            <ComboBoxItem>Small</ComboBoxItem>
+                            <ComboBoxItem>Madium</ComboBoxItem>
+                            <ComboBoxItem>Large</ComboBoxItem>
+                        </ComboBox>
+                    </StackPanel>
                 </StackPanel>
                 <StackPanel VerticalAlignment="Top" Height="Auto" Width="600" HorizontalAlignment="Left">
-                    <uc:NeighborhoodPicker x:Name="NeighborhoodPicker" Margin="0, 40"/>
+                    <Label Foreground="#fff" FontWeight="SemiBold" FontSize="30" Margin="40, 20, 40, 10">Neighborhood</Label>
+                    <uc:NeighborhoodPicker x:Name="NeighborhoodPicker" Margin="0, 20"/>
                 </StackPanel>
                 <StackPanel Margin="0,0,0,40">
-                    <uc:RuleSetConstructor Margin="40, 20" x:Name="RuleSetConstructor" 
+                    <Label Foreground="#fff" FontWeight="SemiBold" FontSize="30" Margin="40, 10">Set of rules</Label>
+                    <uc:RuleSetConstructor Margin="40, 10, 40, 20" x:Name="RuleSetConstructor" 
                                            Tag="{Binding ElementName=NeighborhoodPicker, Path=SelectedNeighborhood, Mode=OneWay}" />
                 </StackPanel>
             </StackPanel>
         </ScrollViewer>
         <StackPanel Margin="0,0,18,0" Width="420" HorizontalAlignment="Right" VerticalAlignment="Bottom" Orientation="Horizontal">
             <Button Click="SaveAutomata" HorizontalAlignment="Right" Width="140" FontWeight="Light"
-                    FontSize="24" Foreground="#fff" Background="#2d3436" Height="80">Save</Button>
+                    FontSize="24" Foreground="#fff" Background="#2d3436" Height="70">Save</Button>
             <Button Click="LoadAutomata" HorizontalAlignment="Right" Width="140" FontWeight="Light" FontSize="24"
-                    Foreground="#fff" Background="#2d3436" Height="80">Load</Button>
+                    Foreground="#fff" Background="#2d3436" Height="70">Load</Button>
             <Button Click="VisualizeAutomata" HorizontalAlignment="Right" Width="140" FontWeight="Light" FontSize="24"
-                    Foreground="#fff" Background="#2d3436" Height="80">Visualize</Button>
+                    Foreground="#fff" Background="#2d3436" Height="70">Visualize</Button>
         </StackPanel>
     </Grid>
 </Page>

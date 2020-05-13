@@ -7,7 +7,7 @@ namespace CellularAutomata
         public Cell[][] Cells;
         readonly int[][] _neighborhoodCoords;
         bool _isInfinite;
-        public Int64 CurrentGeneration = 1;
+        public Int64 CurrentGeneration = 0;
         
         public GameField(Cell[][] cells, int[][] neighborhoodCoords, bool isInfinite = false)
         {

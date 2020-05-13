@@ -27,13 +27,32 @@ namespace Visualizer
             InitializeComponent();
             ResizeMode = ResizeMode.NoResize;
 
+            // User shoud use "Go Back" button in order to clear the memory 
+            MainFrame.Navigated += (obj, e) =>
+            {
+                if (e.Content != null && e.Content is AutomataVisualizer)
+                {
+                    NavigateToConstructorBtn.Visibility = Visibility.Collapsed;
+                    NavigateToGalleryBtn.Visibility = Visibility.Collapsed;
+                } else
+                {
+                    NavigateToConstructorBtn.Visibility = Visibility.Visible;
+                    NavigateToGalleryBtn.Visibility = Visibility.Visible;
+                }
+                    
+            };
+
             automataConstructor = new AutomataConstructor();
 
             MainFrame.Navigate(automataConstructor);
+
+
         }
 
         private void NavigateToConstructor(object sender, RoutedEventArgs e)
-            => MainFrame.Navigate(automataConstructor);
+        {
+            MainFrame.Navigate(automataConstructor);
+        }
 
         private void NavigateToGallery(object sender, RoutedEventArgs e)
         {

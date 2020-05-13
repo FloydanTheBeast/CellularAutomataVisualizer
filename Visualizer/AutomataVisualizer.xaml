@@ -14,7 +14,7 @@
             </ScrollViewer>
         </StackPanel>
 
-        <StackPanel Width="80" HorizontalAlignment="Right" Background="#34495e">
+        <StackPanel Width="80" HorizontalAlignment="Right" Background="#34495e" Grid.ColumnSpan="2">
             <Button Width="80" Height="80" Content="Go back" Click="GoBackBtnClick" 
                     BorderThickness="1" BorderBrush="#222" Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light"/>
             <Button Click="GenerateRandomField" Content="Randomize" VerticalAlignment="Top" Height="80"

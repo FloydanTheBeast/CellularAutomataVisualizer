@@ -6,6 +6,8 @@ namespace CellularAutomata
 {
     public class Automata
     {
+        static readonly string pathToFile = Path.Combine(Environment.CurrentDirectory, "automata.json");
+
         public int _cellSize { get; }
 
         public bool _isInfinite { get; set; }
@@ -46,7 +48,7 @@ namespace CellularAutomata
 
             try
             {
-                using (StreamReader sr = new StreamReader("test.json"))
+                using (StreamReader sr = new StreamReader(pathToFile))
                 {
                     using (JsonReader reader = new JsonTextReader(sr))
                     {
@@ -70,7 +72,7 @@ namespace CellularAutomata
 
             try
             {
-                using (StreamWriter sw = new StreamWriter("test.json"))
+                using (StreamWriter sw = new StreamWriter(pathToFile))
                 using (JsonWriter writer = new JsonTextWriter(sw))
                     serializer.Serialize(writer, automata);
             }

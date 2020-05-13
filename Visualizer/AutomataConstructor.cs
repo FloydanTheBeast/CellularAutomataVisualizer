@@ -90,7 +90,7 @@ namespace Visualizer
             }
             catch (Exception)
             {
-                MessageBox.Show("Error while saving automata to a file", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Error while loading an automata from the file", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -105,9 +105,9 @@ namespace Visualizer
 
 
             if (Automata.Serialize(ConstructAutomata()))
-                MessageBox.Show("Successfuly saved automata to a file", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Successfuly saved automata to the file", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
             else
-                MessageBox.Show("Error while saving automata to a file", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Error while saving automata to the file", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 

@@ -10,7 +10,7 @@
         <Frame x:FieldModifier="public" Name="MainFrame" Height="720" VerticalAlignment="Top" Background="#4b6584"
                Width="1280" HorizontalAlignment="Right" NavigationUIVisibility="Hidden"/>
         <StackPanel Background="#34495e" Width="160" HorizontalAlignment="Left">
-            <Button Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light" BorderThickness="0" Padding="16,10"
+            <Button Name="NavigateToConstructorBtn" Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light" BorderThickness="0" Padding="16,10"
                     Content="Constructor" HorizontalAlignment="Center" Margin="0,48,0,24" VerticalAlignment="Top" Width="100" Click="NavigateToConstructor">
                 <Button.Resources>
                     <Style TargetType="Border">
@@ -18,7 +18,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light" Content="Gallery" Padding="16,10"
+            <Button Name="NavigateToGalleryBtn" Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light" Content="Gallery" Padding="16,10"
                     BorderThickness="0" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top" Width="100" Click="NavigateToGallery" >
                 <Button.Resources>
                     <Style TargetType="Border">
