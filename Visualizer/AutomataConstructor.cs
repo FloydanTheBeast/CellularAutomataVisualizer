@@ -41,7 +41,6 @@ namespace Visualizer
         void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
-
         Automata ConstructAutomata()
         {
             Rule[] ruleArray = new List<Rule>(RuleSetConstructor.RuleSet).ToArray();
@@ -91,7 +90,7 @@ namespace Visualizer
             }
             catch (FileNotFoundException)
             {
-                MessageBox.Show("There is no file with savings", "Error",
+                MessageBox.Show("There is no save file", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
@@ -100,7 +99,6 @@ namespace Visualizer
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
-
 
         private void SaveAutomata(object sender, RoutedEventArgs e)
         {
@@ -119,7 +117,6 @@ namespace Visualizer
                 MessageBox.Show("Error while saving automata to the file", "Error",
                     MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
 
         private void VisualizeAutomata(object sender, RoutedEventArgs e)
         {

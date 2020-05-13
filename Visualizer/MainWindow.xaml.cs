@@ -25,7 +25,10 @@ namespace Visualizer
         public MainWindow()
         {
             InitializeComponent();
+
             ResizeMode = ResizeMode.NoResize;
+
+            Title = "Cellular Automata Visualizer";
 
             // User shoud use "Go Back" button in order to clear the memory 
             MainFrame.Navigated += (obj, e) =>
