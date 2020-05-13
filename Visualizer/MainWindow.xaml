@@ -5,13 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Visualizer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="750" Width="1440">
+        WindowStyle="None"
+        Title="MainWindow" Height="720" Width="1440" MouseDown="HandleDragging">
     <Grid>
-        <Frame x:FieldModifier="public" Name="MainFrame" Height="720" VerticalAlignment="Top" Background="#4b6584"
-               Width="1280" HorizontalAlignment="Right" NavigationUIVisibility="Hidden"/>
+        <Frame x:FieldModifier="public" Name="MainFrame" Background="#4b6584"
+               Width="1280" HorizontalAlignment="Right" NavigationUIVisibility="Hidden" />
         <StackPanel Background="#34495e" Width="160" HorizontalAlignment="Left">
             <Button Name="NavigateToConstructorBtn" Foreground="#fff" Background="#2d3436" FontSize="14" FontWeight="Light" BorderThickness="0" Padding="16,10"
-                    Content="Constructor" HorizontalAlignment="Center" Margin="0,48,0,24" VerticalAlignment="Top" Width="100" Click="NavigateToConstructor">
+                    Content="Constructor" HorizontalAlignment="Center" Margin="0,100,0,24" VerticalAlignment="Top" Width="100" Click="NavigateToConstructor">
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" Value="6"/>
@@ -27,5 +28,7 @@
                 </Button.Resources>
             </Button>
         </StackPanel>
+        <Button Width="60" Height="60" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="20" Content="X"
+                Foreground="#fff" Background="#2d3436" BorderThickness="0" Click="HandleExit" />
     </Grid>
 </Window>
