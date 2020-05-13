@@ -36,6 +36,6 @@
         /// </summary>
         /// <param name="index">Index of the neighbor</param>
         public void ToggleNeighbor(int index) =>
-            CellNeighborhood[index].Properties["isAlive"] = !(bool) CellNeighborhood[index].Properties["isAlive"];
+            CellNeighborhood[index]["isAlive"] = !(bool) CellNeighborhood[index].Properties["isAlive"];
     }
 }

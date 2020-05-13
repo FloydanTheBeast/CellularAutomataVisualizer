@@ -162,10 +162,6 @@
       <Project>{94f8190b-ee06-46b2-b35f-b0856b0fee0c}</Project>
       <Name>CellularAutomata</Name>
     </ProjectReference>
-    <ProjectReference Include="..\TestingLibrary\TestingLibrary.csproj">
-      <Project>{54d1b4e1-b473-4831-bf6c-23c173c7426f}</Project>
-      <Name>TestingLibrary</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

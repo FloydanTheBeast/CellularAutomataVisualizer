@@ -1,20 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using CellularAutomata;
-using TestingLibrary;
 
 namespace Visualizer
 {
@@ -41,10 +33,10 @@ namespace Visualizer
         {
             InitializeComponent();
 
-            isOneDimensional = automata._neighborhood[0].Length == 1;
+            isOneDimensional = automata.Neighborhood[0].Length == 1;
 
-            ruleSet = automata._ruleSet;
-            cellSize = automata._cellSize;
+            ruleSet = automata.RuleSet;
+            cellSize = automata.CellSize;
 
             // Size of gameField in cells
             width = (int)GameField.Width / cellSize;
@@ -52,14 +44,15 @@ namespace Visualizer
 
             timer.Tick += (object sender, EventArgs e) 
                 => UpdateAutomata();
+
             timer.Interval = new TimeSpan((int)(DelaySlider.Value * TimeSpan.TicksPerSecond));
 
             Cell[][] startingField = CellListGenerator.Generate(width, isOneDimensional ? 1 : height);
 
             gameField = new GameField(
                 startingField,
-                automata._neighborhood,
-                automata._isInfinite
+                automata.Neighborhood,
+                automata.IsInfinite
             );
 
             CurrentGenerationLabel.Content = $"{gameField.CurrentGeneration}";
@@ -71,11 +64,8 @@ namespace Visualizer
         }
 
 
-        private void DisableWheelScroll(object sender, MouseWheelEventArgs e)
-        {
-            GameFieldScroll.ScrollToVerticalOffset(-e.Delta);
+        private void DisableWheelScroll(object sender, MouseWheelEventArgs e) =>
             e.Handled = true;
-        }
 
         public void DrawAutomata()
         {
@@ -116,7 +106,6 @@ namespace Visualizer
                 new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ecf0f1"));
         }
 
-        // TODO: Move to utilities
         Rectangle CellToRectangle(Cell cell, bool withBorder = false)
         {
             Rectangle cellRect = new Rectangle();
@@ -189,6 +178,7 @@ namespace Visualizer
             }
         }
 
+
         private void DrawCell(object sender, MouseButtonEventArgs e)
         {
             Point currentPoint = e.GetPosition((Canvas)sender);
@@ -210,7 +200,6 @@ namespace Visualizer
             gameField.GenerateDefault(width, isOneDimensional ? 1 : height);
             GameField.Children.Clear();
             DrawAutomata();
-            /*UpdateAutomataView();*/
         }
 
         private void GoBackBtnClick(object sender, RoutedEventArgs e)

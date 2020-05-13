@@ -17,7 +17,7 @@ namespace CellularAutomata
             char[] cellsStateBits = new char[cellNeighborhood.Length];
                 
                 for (int i = 0; i < cellNeighborhood.Length; i++)
-                    cellsStateBits[i] = (bool)cellNeighborhood[i].Properties["isAlive"] ? '1' : '0';
+                    cellsStateBits[i] = (bool)cellNeighborhood[i]["isAlive"] ? '1' : '0';
 
                 // Rule for transition of a neighborhood
                 int[] transitionBits = ConvertToBits(_ruleNumber, (int) Math.Pow(2, cellNeighborhood.Length));

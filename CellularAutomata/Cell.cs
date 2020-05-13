@@ -10,20 +10,11 @@ namespace CellularAutomata
     {
         public Dictionary<string, object> Properties = new Dictionary<string, object>{
             { "isAlive", false }
-        }; // TODO: Set default value in the constructor
+        };
 
         public static readonly Dictionary<string, object> DefaultProperties = new Dictionary<string, object>{
             { "isAlive", false }
         };
-        
-        // Position, coords (for various dimensions)
-        // Cell comparator
-
-        // List of default properties
-
-        // List of properties
-        
-        // public CellProperties Properties { get; set; }
 
         /// <summary>
         /// Creates 
@@ -82,7 +73,11 @@ namespace CellularAutomata
             return 0;
         }
         
-        public object this[string index] => Properties[index]; // TODO: Catch all possible exceptions
+        public object this[string index]
+        {
+            get => Properties[index];
+            set => Properties[index] = value;
+        }
     
         public override string ToString()
         {

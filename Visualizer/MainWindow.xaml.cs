@@ -45,8 +45,6 @@ namespace Visualizer
             automataConstructor = new AutomataConstructor();
 
             MainFrame.Navigate(automataConstructor);
-
-
         }
 
         private void NavigateToConstructor(object sender, RoutedEventArgs e)

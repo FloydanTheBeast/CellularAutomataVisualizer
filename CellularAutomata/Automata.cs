@@ -8,15 +8,16 @@ namespace CellularAutomata
     {
         static readonly string pathToFile = Path.Combine(Environment.CurrentDirectory, "automata.json");
 
-        public int _cellSize { get; }
+        public int CellSize { get; }
 
-        public bool _isInfinite { get; set; }
+        public bool IsInfinite { get; set; }
 
-        public int[][] _neighborhood { get; set; }
+        public int[][] Neighborhood { get; set; }
 
-        public RuleSet _ruleSet { get; set; }
+        public RuleSet RuleSet { get; set; }
 
         string _name;
+
         public string Name
         {
             get => _name;
@@ -31,13 +32,12 @@ namespace CellularAutomata
 
         public Automata(int cellSize, bool isInfinite, int[][] neighborhood, RuleSet ruleSet, string name = "")
         {
-            _cellSize = cellSize;
-            _isInfinite = isInfinite;
-            _neighborhood = neighborhood;
-            _ruleSet = ruleSet;
+            CellSize = cellSize;
+            IsInfinite = isInfinite;
+            Neighborhood = neighborhood;
+            RuleSet = ruleSet;
             Name = name;
         }
-
 
         public static Automata Deserialize()
         {
@@ -63,7 +63,6 @@ namespace CellularAutomata
 
             return automata;
         }
-
 
         public static bool Serialize(Automata automata)
         {

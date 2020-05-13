@@ -79,10 +79,10 @@ namespace Visualizer
             {
                 automata = Automata.Deserialize();
 
-                IsInfinite = automata._isInfinite;
-                NeighborhoodPicker.SelectedNeighborhood = automata._neighborhood;
+                IsInfinite = automata.IsInfinite;
+                NeighborhoodPicker.SelectedNeighborhood = automata.Neighborhood;
 
-                foreach (var item in new ObservableCollection<Rule>(new List<Rule>(automata._ruleSet.Rules)))
+                foreach (var item in new ObservableCollection<Rule>(new List<Rule>(automata.RuleSet.Rules)))
                     RuleSetConstructor.RuleSet.Add(item);
 
                 await Task.Delay(1);
@@ -90,7 +90,8 @@ namespace Visualizer
             }
             catch (Exception)
             {
-                MessageBox.Show("Error while loading an automata from the file", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Error while loading an automata from the file", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
@@ -99,15 +100,18 @@ namespace Visualizer
         {
             if (RuleSetConstructor.RuleSet.Count == 0)
             {
-                MessageBox.Show("Rule set can't be empty", "Can't costruct an automata", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Rule set can't be empty", "Can't costruct an automata",
+                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 
 
             if (Automata.Serialize(ConstructAutomata()))
-                MessageBox.Show("Successfuly saved automata to the file", "Success", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Successfuly saved automata to the file", "Success",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
             else
-                MessageBox.Show("Error while saving automata to the file", "Error", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Error while saving automata to the file", "Error",
+                    MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
 
@@ -115,7 +119,8 @@ namespace Visualizer
         {
             if (RuleSetConstructor.RuleSet.Count == 0)
             {
-                MessageBox.Show("Rule set can't be empty", "Can't costruct an automata", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                MessageBox.Show("Rule set can't be empty", "Can't costruct an automata",
+                    MessageBoxButton.OK, MessageBoxImage.Exclamation);
                 return;
             }
 

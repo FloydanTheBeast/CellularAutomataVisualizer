@@ -5,6 +5,13 @@ namespace CellularAutomata
     public static class CellListGenerator
     {
         static Random rnd = new Random();
+
+        /// <summary>
+        /// Generates an array of default cells
+        /// </summary>
+        /// <param name="width">Width of an array</param>
+        /// <param name="height">Height of an array</param>
+        /// <returns>Generated array</returns>
         public static Cell[][] Generate(int width, int height = 1)
         {
             if (height < 1)
@@ -22,6 +29,12 @@ namespace CellularAutomata
             return cellList;
         }
 
+        /// <summary>
+        /// Generates a random array of cells
+        /// </summary>
+        /// <param name="width">Width of an array</param>
+        /// <param name="height">Height of an array</param>
+        /// <returns>Generated array</returns>
         public static Cell[][] GenerateRandom(int width, int height = 1)
         {
             if (height < 1)

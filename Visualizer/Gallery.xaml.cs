@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using CellularAutomata;
 using AutomatasGallery;
 
@@ -26,9 +15,6 @@ namespace Visualizer
         {
             InitializeComponent();
 
-            int x = 0;
-            int y = 0;
-
             ConstructGallerty(Gallery2D, Automatas2D.automatas);
             ConstructGallerty(Gallery1D, Automatas1D.automatas);
         }
@@ -38,8 +24,10 @@ namespace Visualizer
             for (int i = 0; i < automatas.Count; i++)
             {
                 StackPanel row = new StackPanel();
+
                 row.Orientation = Orientation.Horizontal;
                 row.Width = 0;
+
                 double cardWidth;
 
                 do

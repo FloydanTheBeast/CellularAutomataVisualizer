@@ -75,7 +75,7 @@ namespace CellularAutomata
 
             for (int i = 0; i < cellNeighborhood.Length; i++)
                 // TODO: Check property type
-                if (i != centerCoords && (bool)cellNeighborhood[i].Properties[PropertyName] == (bool)PropertyValue)
+                if (i != centerCoords && (bool)cellNeighborhood[i][PropertyName] == (bool)PropertyValue)
                     propertyValueCounter++;
 
             // Console.WriteLine(propertyValueCounter);

@@ -23,7 +23,6 @@ namespace Visualizer
             InitializeComponent();
             RuleSet.CollectionChanged += RuleSetCollectionChanged;
         }
-
  
         public void UpdateViews()
         {
@@ -38,7 +37,6 @@ namespace Visualizer
                     ((NearbyNeighborsRuleConstructor)item).UpdateView();
             }
         }
-
 
         private void CreateRuleBtnClick(object sender, RoutedEventArgs e)
         {
@@ -61,16 +59,17 @@ namespace Visualizer
                         ));
                         break;
                     default:
-                        MessageBox.Show("There is no such rule", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        MessageBox.Show("There is no such rule", "Error",
+                            MessageBoxButton.OK, MessageBoxImage.Error);
                         break;
                 }
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("Please, select a rule type", "Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+                MessageBox.Show("Please, select a rule type", "Message",
+                    MessageBoxButton.OK, MessageBoxImage.Warning);
             }
         }
-
 
         private void RuleSetCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
@@ -79,18 +78,21 @@ namespace Visualizer
                 case NotifyCollectionChangedAction.Add: // если добавление
                     if (e.NewItems[0] is ExactPatternRule)
                     {
-                        ExactRuleConstructor ruleConstructor = new ExactRuleConstructor(e.NewStartingIndex);
+                        ExactRuleConstructor ruleConstructor =
+                            new ExactRuleConstructor(e.NewStartingIndex);
+
                         RuleListView.Items.Add(ruleConstructor);
                     }
                     else if (e.NewItems[0] is NearbyNeighborsRule)
                     {
-                        NearbyNeighborsRuleConstructor ruleConstructor = new NearbyNeighborsRuleConstructor(e.NewStartingIndex);
+                        NearbyNeighborsRuleConstructor ruleConstructor =
+                            new NearbyNeighborsRuleConstructor(e.NewStartingIndex);
+
                         RuleListView.Items.Add(ruleConstructor);
                     }
                     break;
             }
         }
-
 
         public event PropertyChangedEventHandler PropertyChanged;
         void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
@@ -110,13 +112,11 @@ namespace Visualizer
             }
         }
 
-
         public void ClearRuleSet()
         {
             RuleListView.Items.Clear();
             RuleSet.Clear();
         }
-
 
         private void HandleKeyDown(object sender, System.Windows.Input.KeyEventArgs e)
         {
@@ -124,10 +124,8 @@ namespace Visualizer
                 RemoveSelectedRule();
         }
 
-
         private void RemoveSelectedRuleBtnClick(object sender, RoutedEventArgs e)
             => RemoveSelectedRule();
-
 
         private void ClearRuleSetBtnClick(object sender, RoutedEventArgs e)
             => ClearRuleSet();
