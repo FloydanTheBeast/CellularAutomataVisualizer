@@ -7,7 +7,6 @@
       mc:Ignorable="d" 
       d:DesignHeight="720" d:DesignWidth="1280"
       Title="AutomataConstructor">
-
     <Grid>
         <ScrollViewer HorizontalAlignment="Left" Height="720" VerticalAlignment="Top" Width="1280">
             <StackPanel>
@@ -21,7 +20,7 @@
                         <ComboBox SelectedIndex="{Binding Path=Size, Mode=OneWayToSource}" Width="140" VerticalContentAlignment="Center"
                                   FontSize="14" FontWeight="Light" BorderThickness="0" Height="30">
                             <ComboBoxItem>Small</ComboBoxItem>
-                            <ComboBoxItem>Madium</ComboBoxItem>
+                            <ComboBoxItem>Medium</ComboBoxItem>
                             <ComboBoxItem>Large</ComboBoxItem>
                         </ComboBox>
                     </StackPanel>

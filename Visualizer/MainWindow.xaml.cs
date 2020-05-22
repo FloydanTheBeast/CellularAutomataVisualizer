@@ -55,6 +55,6 @@ namespace Visualizer
         }
 
         private void HandleExit(object sender, RoutedEventArgs e) =>
-            System.Windows.Application.Current.Shutdown();
+            Application.Current.Shutdown();
     }
 }
